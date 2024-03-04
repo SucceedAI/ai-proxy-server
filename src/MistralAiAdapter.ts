@@ -1,13 +1,10 @@
 import axios from 'axios';
 import { AIProvideable } from './AIProvideable';
 
-class MistralAiAdapter implements AIProvideable {
-    private apiKey: string;
+export class MistralAiAdapter implements AIProvideable {
     private readonly endpoint: string = 'https://api.mistralai.com/query';
 
-    constructor(apiKey: string) {
-        this.apiKey = apiKey;
-    }
+    constructor(private apiKey: string) {}
 
     async sendQuery(query: string): Promise<string> {
         try {
@@ -24,5 +21,3 @@ class MistralAiAdapter implements AIProvideable {
         }
     }
 }
-
-export default MistralAiAdapter;

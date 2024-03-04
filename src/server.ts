@@ -3,11 +3,15 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import MistralAiAdapter from './MistralAiAdapter'; // Import your Mistral AI Adapter
 import AIProvideable from './AIProvideable';
+import dotenv from 'dotenv';
+
+const DEFAULT_POST = 3000;
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 3000;
+// Now you can use process.env to access your environment variables
+const apiKey = process.env.AI_API_KEY;
+const port = process.env.PORT || DEFAULT_POST;
 
 // Initialize your AI provider here. You can switch to different providers as needed.
 const aiProvider: AIProvideable = new MistralAiAdapter(process.env.AI_API_KEY);
