@@ -1,0 +1,15 @@
+# Distribution
+dist
+.env
+
+# Package manager
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode
+.idea
