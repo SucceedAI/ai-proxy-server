@@ -1,17 +1,16 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { MistralAiAdapter } from './MistralAiAdapter';
-import { AIProvideable } from './AIProvideable';
+import { AIProvideable } from './api-providers';
+import { AIService } from './AiService';
 
+// load env variables
 dotenv.config();
 
-// Now you can use process.env to access your environment variables
-const port: string | number = process.env.PORT || 3000;
-
-// Initialize your AI provider here. You can switch to different providers as needed.
-const aiProvider: AIProvideable = new MistralAiAdapter(process.env.AI_API_KEY || '');
+const port: string | number = process.env.APP_PORT || 3000;
 
 const app: Express = express();
+
+let aiProvider: AIProvideable = AIService.pickAIProvider();
 
 app.use(express.json());
 
@@ -22,7 +21,7 @@ interface AIQueryRequest {
 app.post('/query', async (req: Request, res: Response) => {
     const { query }: AIQueryRequest = req.body;
     try {
-        const queryResult: string = await aiProvider.sendQuery(query);
+        const queryResult: string = await aiProvider.query(query);
         res.json({ response: queryResult });
     } catch (error) {
         console.error('Error:', error);
