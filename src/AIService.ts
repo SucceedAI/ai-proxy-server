@@ -1,22 +1,18 @@
-import { AIProvideable, MistralAIAdapter, OpenAIAdapter } from "./api-providers";
+import { AIProvideable, MistralAIAdapter, OpenAIAdapter } from "./ai/api-providers";
+import { config } from "./config";
+
 
 export namespace AIService {
 
     // Initialize the AI provider. We can switch to different providers as needed 
     // and enable the one we want
     export const pickAIProvider = (): AIProvideable => {
-        if (process.env.MISTRAL_AI_API_ENABLED) {
-            const apiKey = process.env.MISTRAL_AI_API_KEY || '';
-            const modelId = process.env.MISTRAL_AI_API_KEY || '';
-
-            return new MistralAIAdapter(process.env.MISTRAL_AI_API_KEY || '', pickModelId(modelId));
+        if (config.mistralAiApiEnabled) {
+            return new MistralAIAdapter(config.mistralAiApiKey, pickModelId(config.mistralAiModel));
         }
 
-        if (process.env.OPEN_AI_API_ENABLED) {
-            const apiKey = process.env.OPEN_AI_API_KEY || '';
-            const modelId = process.env.OPEN_AI_MODEL || '';
-
-            return new OpenAIAdapter(process.env.MISTRAL_AI_API_KEY || '', pickModelId(modelId));
+        if (config.openAiApiEnabled) {
+            return new OpenAIAdapter(config.openAiApiKey, pickModelId(config.openAiModel));
         }
 
         throw new Error('Not AI Provider Enabled');

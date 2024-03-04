@@ -1,46 +1,39 @@
-import express, { Express, Request, Response } from 'express';
-import { StatusCodes } from 'http-status-codes';
-import dotenv from 'dotenv';
-import { AIProvideable } from './api-providers';
-import { AIService } from './AiService';
+import compression from "compression";
+import cors from "cors";
+import dotenv from "dotenv";
+import express, { Express } from "express";
+import rateLimit from "express-rate-limit";
+import helmet from "helmet";
 
-// load env variables
-dotenv.config();
+import { router as mainRoutes } from './main.routes';
+import { router as aiRoutes } from "./ai";
+import { authMiddleware } from "./middlewares/authMiddleware";
 
-const port: string | number = process.env.APP_PORT || 3000;
+// load environment variables from .env file
+import { config } from "./config";
 
 const app: Express = express();
 
-let aiProvider: AIProvideable = AIService.pickAIProvider();
+const rateLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+});
 
+app.use(compression());
+
+// Apply the rate limiting middleware to API calls only
+// Further info about rate limiting https://en.wikipedia.org/wiki/Rate_limiting
+app.use(rateLimiter);
+
+// Parse incoming JSON requests and add it in `req.body`
 app.use(express.json());
 
-interface AIQueryRequest {
-    query: string;
-}
+app.use(helmet());
+app.use(cors());
 
-app.post('/query', async (req: Request, res: Response) => {
-    const { query }: AIQueryRequest = req.body;
-    try {
-        const queryResult: string = await aiProvider.query(query);
-        res.json({ response: queryResult });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Error processing request' });
-    }
-});
+app.use("/v1", mainRoutes);
+app.use("/v1/ai", authMiddleware, aiRoutes);
 
-app.get('/health', async (req: Request, res: Response) => {
-    res.json({ health: true });
-});
-
-app.get('/version', async (req: Request, res: Response) => {
-    // TODO get version from package.json
-
-    res.json({ version: 1.0 });
-});
-
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+app.listen(config.port, () => {
+  console.log(`Server is running on http://localhost:${config.port}`);
 });
