@@ -29,6 +29,17 @@ app.post('/query', async (req: Request, res: Response) => {
     }
 });
 
+app.get('/health', async (req: Request, res: Response) => {
+    res.json({ health: true });
+});
+
+app.get('/version', async (req: Request, res: Response) => {
+    // TODO get version from package.json
+
+    res.json({ version: 1.0 });
+});
+
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
