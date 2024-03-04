@@ -13,6 +13,7 @@ export class MistralAIAdapter implements AIProvideable {
             const response = await axios.post(this.endpoint, payload, {
                 headers: {
                     'Authorization': `Bearer ${this.apiKey}`,
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 }
             });
