@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import dotenv from 'dotenv';
 import { AIProvideable } from './api-providers';
 import { AIService } from './AiService';
@@ -25,7 +26,7 @@ app.post('/query', async (req: Request, res: Response) => {
         res.json({ response: queryResult });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).send({ message: 'Error processing request' });
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Error processing request' });
     }
 });
 
