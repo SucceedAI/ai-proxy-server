@@ -3,7 +3,9 @@ export interface AIProvideable {
     buildPayload(query: string): PayloadProps;
 }
 
+export type Role = 'user' | 'system' | 'assistant';
+
 export interface PayloadProps {
     model: string;
-    messages: Array<{role: string, content: string}>;
+    messages: Array<{role: Role, content: string}>;
 }

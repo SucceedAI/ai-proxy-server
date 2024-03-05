@@ -1,12 +1,13 @@
 import OpenAI from 'openai';
-import {AIProvideable, PayloadProps } from './api.type';
+import {AIProvideable, PayloadProps, Role } from './api.type';
 import { logger } from '../../logger';
 
 export class OpenAIAdapter implements AIProvideable {
-    private openai: OpenAI;
+    private readonly chatRole: Role = "user";
+    private client: OpenAI;
 
     constructor(private apiKey: string, private modelId: string) {
-        this.openai = new OpenAI({
+        this.client = new OpenAI({
             apiKey: this.apiKey,
         });
     }
@@ -14,7 +15,7 @@ export class OpenAIAdapter implements AIProvideable {
     async query(query: string): Promise<string> {
         try {
             const payload = this.buildPayload(query);
-            const response = await this.openai.chat.completions.create(payload);
+            const response = await this.client.chat.completions.create(payload);
 
             return response?.choices[0]?.message?.content?.trim() || '';
         } catch (error: any) {
@@ -23,9 +24,9 @@ export class OpenAIAdapter implements AIProvideable {
         }
     }
 
-    public buildPayload(query: string): any {
+    public buildPayload(query: string): PayloadProps {
         const payload = {
-            messages: [{ role: 'system', content: query }],
+            messages: [{ role: this.chatRole, content: query }],
             model: this.modelId,
         };
 

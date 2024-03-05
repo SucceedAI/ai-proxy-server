@@ -1,36 +1,32 @@
-import axios from 'axios';
-import { AIProvideable, PayloadProps } from './api.type';
-import { logger } from '../../logger';
+import MistralClient from "@mistralai/mistralai";
+import { AIProvideable, PayloadProps, Role } from "./api.type";
 
 export class MistralAIAdapter implements AIProvideable {
-    private readonly endpoint: string = 'https://api.mistralai.com/v1/chat/completions';
+  private readonly chatRole: Role = "user";
+  private client: MistralClient;
 
-    constructor(private apiKey: string, private modelId: string) {}
+  constructor(private apiKey: string, private modelId: string) {
+    this.client = new MistralClient(this.apiKey);
+  }
 
-    async query(query: string): Promise<string> {
-       const payload = this.buildPayload(query);
+  async query(query: string): Promise<string> {
+    const payload = this.buildPayload(query);
 
-        try {
-            const response = await axios.post(this.endpoint, payload, {
-                headers: {
-                    'Authorization': `Bearer ${this.apiKey}`,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-            return response.data; // Adjust based on the response format of MistralAI
-        } catch (error: any) {
-            logger.error('Error in MistralAiAdapter:', error);
-            throw new Error('Error processing AI query');
-        }
+    try {
+      const response = await this.client.chat(payload);
+      return response.choices[0].message.content; // Adjust based on the response format of MistralAI
+    } catch (error: any) {
+      console.error("Error in MistralAiAdapter:", error);
+      throw new Error("Error processing AI query");
     }
+  }
 
-    public buildPayload(query: string): PayloadProps {
-        const payload = {
-            messages: [{role: "system", content: query}],
-            model: this.modelId
-        };
+  public buildPayload(query: string): PayloadProps {
+    const payload = {
+      model: this.modelId,
+      messages: [{ role: this.chatRole, content: query }],
+    };
 
-        return payload;
-    }
+    return payload;
+  }
 }
