@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AIProvideable, PayloadProps } from './api.type';
+import { logger } from '../../logging';
 
 export class MistralAIAdapter implements AIProvideable {
     private readonly endpoint: string = 'https://api.mistralai.com/v1/chat/completions';
@@ -19,7 +20,7 @@ export class MistralAIAdapter implements AIProvideable {
             });
             return response.data; // Adjust based on the response format of MistralAI
         } catch (error: any) {
-            console.error('Error in MistralAiAdapter:', error);
+            logger.error('Error in MistralAiAdapter:', error);
             throw new Error('Error processing AI query');
         }
     }

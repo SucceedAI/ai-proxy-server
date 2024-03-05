@@ -1,5 +1,6 @@
 import OpenAI from 'openai';
 import {AIProvideable, PayloadProps } from './api.type';
+import { logger } from '../../logging';
 
 export class OpenAIAdapter implements AIProvideable {
     private openai: OpenAI;
@@ -17,7 +18,7 @@ export class OpenAIAdapter implements AIProvideable {
 
             return response?.choices[0]?.message?.content?.trim() || '';
         } catch (error: any) {
-            console.error('Error in OpenAiAdapter:', error);
+            logger.error('Error in OpenAiAdapter:', error);
             throw new Error('Error processing AI query');
         }
     }

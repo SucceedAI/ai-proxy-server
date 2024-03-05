@@ -8,6 +8,7 @@ import { router as mainRoutes } from './main.routes';
 import { router as aiRoutes } from "./ai";
 import { authMiddleware } from "./middlewares/authMiddleware";
 import { config } from "./config";
+import { logger } from './logging';
 
 const app: Express = express();
 
@@ -15,8 +16,6 @@ const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 });
-
-// TODO Use pino logging
 
 app.use(compression());
 
@@ -34,5 +33,5 @@ app.use("/v1", mainRoutes);
 app.use("/v1/ai", authMiddleware, aiRoutes);
 
 app.listen(config.port, () => {
-  console.log(`Server is running on http://localhost:${config.port}`);
+  logger.log(`Server is running on http://localhost:${config.port}`);
 });
