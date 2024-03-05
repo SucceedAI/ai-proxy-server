@@ -16,6 +16,8 @@ const rateLimiter = rateLimit({
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
 });
 
+// TODO Use pino logging
+
 app.use(compression());
 
 // Apply the rate limiting middleware to API calls only
