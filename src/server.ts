@@ -1,13 +1,13 @@
-import compression from "compression";
-import cors from "cors";
-import express, { Express } from "express";
-import rateLimit from "express-rate-limit";
-import helmet from "helmet";
+import compression from 'compression';
+import cors from 'cors';
+import express, { Express } from 'express';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
 
 import { router as mainRoutes } from './main.routes';
-import { router as aiRoutes } from "./ai";
-import { authMiddleware } from "./middlewares/authMiddleware";
-import { config } from "./config";
+import { router as aiRoutes } from './ai';
+import { authMiddleware } from './middlewares/authMiddleware';
+import { config } from './config';
 import { logger } from './logger';
 
 const app: Express = express();
@@ -29,8 +29,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(cors());
 
-app.use("/v1", mainRoutes);
-app.use("/v1/ai", authMiddleware, aiRoutes);
+app.use('/v1', mainRoutes);
+app.use('/v1/ai', authMiddleware, aiRoutes);
 
 app.listen(config.port, () => {
   logger.info(`Server is running on http://localhost:${config.port}`);

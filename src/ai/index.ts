@@ -1,1 +1,1 @@
-export { router } from './ai.routes'
+export { router } from './ai.routes';

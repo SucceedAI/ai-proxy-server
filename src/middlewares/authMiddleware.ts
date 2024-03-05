@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from 'express';
 //import jwt from "jsonwebtoken";
-import { StatusCodes } from "http-status-codes";
+import { StatusCodes } from 'http-status-codes';
 
-import { config } from "../config";
+import { config } from '../config';
 
 // Hack: nodemon wants this here
 declare global {
@@ -13,16 +13,12 @@ declare global {
   }
 }
 
-export const authMiddleware = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const errorMessage: string = "Access denied. Token not found";
+export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  const errorMessage: string = 'Access denied. Token not found';
 
   // Retrieve authorization token
   const authHeader: string = req.headers.authorization;
-  const tokenPrefix: string = "Bearer ";
+  const tokenPrefix: string = 'Bearer ';
 
   if (!authHeader?.startsWith(tokenPrefix)) {
     return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
@@ -35,7 +31,7 @@ export const authMiddleware = (
 
   try {
     if (sid !== config.jwtToken) {
-      throw new Error("Invalid token");
+      throw new Error('Invalid token');
     }
 
     // TODO Use JWT in the future increasing API access security
@@ -43,6 +39,6 @@ export const authMiddleware = (
     // req.user = decoded; // Attach user data to the request object
     next();
   } catch (e: unknown) {
-    res.status(StatusCodes.BAD_REQUEST).send("Invalid token.");
+    res.status(StatusCodes.BAD_REQUEST).send('Invalid token.');
   }
 };

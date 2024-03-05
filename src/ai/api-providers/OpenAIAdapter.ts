@@ -1,12 +1,15 @@
-import OpenAI from "openai";
-import { AIProvideable, PayloadProps, Role } from "./api.type";
-import { logger } from "../../logger";
+import OpenAI from 'openai';
+import { AIProvideable, PayloadProps, Role } from './api.type';
+import { logger } from '../../logger';
 
 export class OpenAIAdapter implements AIProvideable {
-  private readonly chatRole: Role = "user";
+  private readonly chatRole: Role = 'user';
   private client: OpenAI;
 
-  constructor(private apiKey: string, private modelId: string) {
+  constructor(
+    private apiKey: string,
+    private modelId: string
+  ) {
     this.client = new OpenAI({
       apiKey: this.apiKey,
     });
@@ -17,10 +20,10 @@ export class OpenAIAdapter implements AIProvideable {
       const payload = this.buildPayload(query);
       const response = await this.client.chat.completions.create(payload);
 
-      return response?.choices[0]?.message?.content?.trim() || "";
+      return response?.choices[0]?.message?.content?.trim() || '';
     } catch (error: any) {
-      logger.error("Error in OpenAiAdapter:", error);
-      throw new Error("Error processing AI query");
+      logger.error('Error in OpenAiAdapter:', error);
+      throw new Error('Error processing AI query');
     }
   }
 

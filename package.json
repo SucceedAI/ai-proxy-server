@@ -9,8 +9,8 @@
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "dev": "nodemon src/server.ts",
-    "check:prettier": "./node_modules/.bin/prettier --check \"src/**/*.{ts,js,json}\" \"!package.json\"",
-    "fix:prettier": "./node_modules/.bin/prettier --write \"**/*.{ts,js,json}\" \"!package.json\"",
+    "prettier:check": "./node_modules/.bin/prettier --check \"src/**/*.{ts,js,json}\" \"!package.json\"",
+    "prettier:fix": "./node_modules/.bin/prettier --write \"**/*.{ts,js,json}\" \"!package.json\""
 
   },
   "dependencies": {
