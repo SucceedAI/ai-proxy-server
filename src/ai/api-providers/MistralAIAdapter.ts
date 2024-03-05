@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AIProvidable, PayloadProps, Role } from './api.type';
+import { logger } from 'src/logger';
 
 export class MistralAIAdapter implements AIProvidable {
   private readonly chatRole: Role = 'user';
@@ -14,14 +15,16 @@ export class MistralAIAdapter implements AIProvidable {
     const payload = this.buildPayload(query);
 
     try {
-      const response = await axios.post(this.chatCompletionUrl, payload, {
+      const { data: { choices: [ { message: { content } } ] } } = await axios.post(this.chatCompletionUrl, payload, {
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
       });
-      return response.data.choices[0].message.content;
+      logger.info(content);
+
+      return content;
     } catch (error: any) {
       console.error('Error in MistralAiAdapter:', error);
       throw new Error('Error processing AI query');

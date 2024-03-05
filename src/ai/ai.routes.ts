@@ -12,7 +12,7 @@ let aiProvider: AIProvidable = AIService.pickAIProvider();
 router.post('/query', async (req: Request, res: Response) => {
   const { query, systemInfo }: AIQueryRequest = req.body;
 
-  if (!query.length) {
+  if (!query?.length) {
     return res.status(StatusCodes.BAD_REQUEST).send('Missing query in the payload');
   }
 
