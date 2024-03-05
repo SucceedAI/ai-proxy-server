@@ -1,5 +1,6 @@
 export type AIProvidable = {
   query(query: string): Promise<string>;
+  getModel(): string;
   buildPayload(query: string): PayloadProps;
 }
 

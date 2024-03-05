@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { AIQueryRequest } from './request.type';
+import { AIQueryRequest, BodyResponse } from './request.type';
 import { AIProvidable } from './api-providers';
 import { AIService } from '../AIService';
 import { logger } from '../logger';
@@ -20,8 +20,12 @@ router.post('/query', async (req: Request, res: Response) => {
 
   try {
     const queryResult: string = await aiProvider.query(query);
+    const model = aiProvider.getModel();
 
-    return res.json({ response: queryResult });
+    const body: BodyResponse = { content: queryResult, model };
+    logger.info(body);
+
+    res.status(StatusCodes.OK).json(body);
   } catch (error) {
     logger.error('Error:', error);
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Error processing request' });

@@ -11,7 +11,7 @@ export class MistralAIAdapter implements AIProvidable {
     private modelId: string
   ) {}
 
-  async query(query: string): Promise<string> {
+  public async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);
 
     try {
@@ -22,13 +22,16 @@ export class MistralAIAdapter implements AIProvidable {
           'Content-Type': 'application/json',
         },
       });
-      logger.info(content);
 
-      return content;
+      return content?.trim() || '';
     } catch (error: any) {
       console.error('Error in MistralAiAdapter:', error);
       throw new Error('Error processing AI query');
     }
+  }
+
+  public getModel(): string {
+    return this.modelId;
   }
 
   public buildPayload(query: string): PayloadProps {

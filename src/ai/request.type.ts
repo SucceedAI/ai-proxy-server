@@ -1,10 +1,15 @@
 export type AIQueryRequest = {
   query: string;
-  systemInfo?: systemInfo;
+  systemInfo?: SystemInfo;
 };
 
-type systemInfo = {
+export type SystemInfo = {
   osVersion?: string;
   osName?: string;
   model?: string;
+};
+
+export type BodyResponse = {
+  content: string;
+  model: string;
 };

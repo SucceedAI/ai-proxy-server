@@ -15,7 +15,7 @@ export class OpenAIAdapter implements AIProvidable {
     });
   }
 
-  async query(query: string): Promise<string> {
+  public async query(query: string): Promise<string> {
     try {
       const payload = this.buildPayload(query);
       const response = await this.client.chat.completions.create(payload);
@@ -25,6 +25,10 @@ export class OpenAIAdapter implements AIProvidable {
       logger.error('Error in OpenAiAdapter:', error);
       throw new Error('Error processing AI query');
     }
+  }
+
+  public getModel(): string {
+    return this.modelId;
   }
 
   public buildPayload(query: string): PayloadProps {
