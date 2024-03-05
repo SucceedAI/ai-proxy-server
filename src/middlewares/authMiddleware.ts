@@ -19,13 +19,22 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  // Authorization Token
-  const token = req.headers.authorization?.split(" ")[1];
+  const errorMessage: string = "Access denied. Token not found";
 
-  if (!token) {
+  // Authorization Token
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith("Bearer")) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .send("Access denied. No token provided.");
+      .send(errorMessage);
+  }
+
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token?.length) {
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .send(errorMessage);
   }
 
   try {
