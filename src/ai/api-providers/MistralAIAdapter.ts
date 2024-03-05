@@ -1,23 +1,27 @@
-import MistralClient from '@mistralai/mistralai';
-import { AIProvideable, PayloadProps, Role } from './api.type';
+import axios from 'axios';
+import { AIProvidable, PayloadProps, Role } from './api.type';
 
-export class MistralAIAdapter implements AIProvideable {
+export class MistralAIAdapter implements AIProvidable {
   private readonly chatRole: Role = 'user';
-  private client: MistralClient;
+  private readonly chatCompletionUrl: string = 'https://api.mistral.ai/v1/chat/completions';
 
   constructor(
     private apiKey: string,
     private modelId: string
-  ) {
-    this.client = new MistralClient(this.apiKey);
-  }
+  ) {}
 
   async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);
 
     try {
-      const response = await this.client.chat(payload);
-      return response.choices[0].message.content; // Adjust based on the response format of MistralAI
+      const response = await axios.post(this.chatCompletionUrl, payload, {
+        headers: {
+          Authorization: `Bearer ${this.apiKey}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      return response.data.choices[0].message.content;
     } catch (error: any) {
       console.error('Error in MistralAiAdapter:', error);
       throw new Error('Error processing AI query');

@@ -1,10 +1,10 @@
-import { AIProvideable, MistralAIAdapter, OpenAIAdapter } from './ai/api-providers';
+import { AIProvidable, MistralAIAdapter, OpenAIAdapter } from './ai/api-providers';
 import { config } from './config';
 
 export namespace AIService {
   // Initialize the AI provider. We can switch to different providers as needed
   // and enable the one we want
-  export const pickAIProvider = (): AIProvideable => {
+  export const pickAIProvider = (): AIProvidable => {
     if (config.mistralAiApiEnabled) {
       return new MistralAIAdapter(config.mistralAiApiKey, pickModelId(config.mistralAiModel));
     }

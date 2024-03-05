@@ -1,8 +1,8 @@
 import OpenAI from 'openai';
-import { AIProvideable, PayloadProps, Role } from './api.type';
+import { AIProvidable, PayloadProps, Role } from './api.type';
 import { logger } from '../../logger';
 
-export class OpenAIAdapter implements AIProvideable {
+export class OpenAIAdapter implements AIProvidable {
   private readonly chatRole: Role = 'user';
   private client: OpenAI;
 

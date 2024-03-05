@@ -18,6 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "strict": true,
+    "isolatedModules": true,
     "esModuleInterop": true
   },
   "include": ["src/**/*.ts"],
