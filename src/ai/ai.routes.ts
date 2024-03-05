@@ -9,9 +9,13 @@ const router = express.Router();
 let aiProvider: AIProvideable = AIService.pickAIProvider();
 
 router.post("/query", async (req: Request, res: Response) => {
-  const { query }: AIQueryRequest = req.body;
+  const { query, systemInfo }: AIQueryRequest = req.body;
+
+  console.info("Request System Info", systemInfo);
+
   try {
     const queryResult: string = await aiProvider.query(query);
+
     res.json({ response: queryResult });
   } catch (error) {
     console.error("Error:", error);
