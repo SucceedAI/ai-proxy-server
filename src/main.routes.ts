@@ -11,9 +11,9 @@ router.post("/token-generator", (req, res) => {
     {
       /* user data */
     },
-    process.env.JWT_SECRET!,
+    config.jwtToken,
     {
-      expiresIn: "1h", // expires in 1 hour
+      expiresIn: config.jwtTokenExpiryTime,
     }
   );
 

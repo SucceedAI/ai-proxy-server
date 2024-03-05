@@ -5,6 +5,7 @@ interface ConfigProps {
   // App Server
   port: string | number;
   jwtToken: string;
+  jwtTokenExpiryTime: string;
 
   // Mistral AI
   mistralAiApiEnabled: boolean;
@@ -20,6 +21,7 @@ interface ConfigProps {
 const config: ConfigProps = {
   port: process.env.APP_PORT || 3000,
   jwtToken: process.env.JWT_SECRET || "jwt-secret",
+  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '1h',
 
   mistralAiApiEnabled: !!process.env.MISTRAL_AI_API_ENABLED,
   mistralAiApiKey: process.env.MISTRAL_AI_API_KEY || "",
