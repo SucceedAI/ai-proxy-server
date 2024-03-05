@@ -1,5 +1,9 @@
 import { jwt } from "jsonwebtoken";
-require("dotenv").config();
+import dotenv from "dotenv";
+
+// load environment variables from .env file
+dotenv.config();
+
 
 interface ConfigProps {
   // App Server
@@ -21,7 +25,7 @@ interface ConfigProps {
 const config: ConfigProps = {
   port: process.env.APP_PORT || 3000,
   jwtToken: process.env.JWT_SECRET || "jwt-secret",
-  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '1h',
+  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || "1h",
 
   mistralAiApiEnabled: !!process.env.MISTRAL_AI_API_ENABLED,
   mistralAiApiKey: process.env.MISTRAL_AI_API_KEY || "",

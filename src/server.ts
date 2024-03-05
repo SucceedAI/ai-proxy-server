@@ -1,6 +1,5 @@
 import compression from "compression";
 import cors from "cors";
-import dotenv from "dotenv";
 import express, { Express } from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
@@ -8,8 +7,6 @@ import helmet from "helmet";
 import { router as mainRoutes } from './main.routes';
 import { router as aiRoutes } from "./ai";
 import { authMiddleware } from "./middlewares/authMiddleware";
-
-// load environment variables from .env file
 import { config } from "./config";
 
 const app: Express = express();
