@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import { AIQueryRequest } from "./request.type";
 import { AIProvideable } from "./api-providers";
 import { AIService } from "../AIService";
-import { logger } from './logging';
+import { logger } from '../logger';
 
 const router = express.Router();
 
