@@ -8,7 +8,7 @@ import { router as mainRoutes } from './main.routes';
 import { router as aiRoutes } from "./ai";
 import { authMiddleware } from "./middlewares/authMiddleware";
 import { config } from "./config";
-import { logger } from './logging';
+import { logger } from './logger';
 
 const app: Express = express();
 

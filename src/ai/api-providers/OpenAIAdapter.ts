@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import {AIProvideable, PayloadProps } from './api.type';
-import { logger } from '../../logging';
+import { logger } from '../../logger';
 
 export class OpenAIAdapter implements AIProvideable {
     private openai: OpenAI;

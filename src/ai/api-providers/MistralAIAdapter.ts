@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { AIProvideable, PayloadProps } from './api.type';
-import { logger } from '../../logging';
+import { logger } from '../../logger';
 
 export class MistralAIAdapter implements AIProvideable {
     private readonly endpoint: string = 'https://api.mistralai.com/v1/chat/completions';
