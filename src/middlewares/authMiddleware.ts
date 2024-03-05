@@ -6,13 +6,12 @@ import { config } from "../config";
 
 // Hack: nodemon wants this here
 declare global {
-    namespace Express {
-      export interface Request {
-        user?: any;
-      }
+  namespace Express {
+    export interface Request {
+      user?: any;
     }
   }
-
+}
 
 export const authMiddleware = (
   req: Request,
@@ -21,29 +20,26 @@ export const authMiddleware = (
 ) => {
   const errorMessage: string = "Access denied. Token not found";
 
-  // Authorization Token
-  const authHeader = req.headers.authorization;
-  if (!authHeader?.startsWith("Bearer")) {
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .send(errorMessage);
+  // Retrieve authorization token
+  const authHeader: string = req.headers.authorization;
+  const tokenPrefix: string = "Bearer ";
+
+  if (!authHeader?.startsWith(tokenPrefix)) {
+    return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 
-  const token = req.headers.authorization?.split(" ")[1];
-
-  if (!token?.length) {
-    return res
-      .status(StatusCodes.UNAUTHORIZED)
-      .send(errorMessage);
+  const sid: string = authHeader.substring(tokenPrefix.length);
+  if (!sid?.length) {
+    return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 
   try {
-    if (token !== config.jwtToken) {
-      throw new Error('Invalid token');
+    if (sid !== config.jwtToken) {
+      throw new Error("Invalid token");
     }
 
     // TODO Use JWT in the future increasing API access security
-    // const decoded = jwt.verify(token, config.jwtToken);
+    // const decoded = jwt.verify(sid, config.jwtToken);
     // req.user = decoded; // Attach user data to the request object
     next();
   } catch (e: unknown) {
