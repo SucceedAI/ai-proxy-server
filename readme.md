@@ -5,13 +5,13 @@ Simple backend proxy API to handle requests between your macOS SwiftUI app and t
 
 ## Get Started
 
-1. `npm install` to install the dependencies
-2. `npm run dev` for having nodemon running to the server restarting automatically on file changes
+1. `npm install` to install the dependencies.
+2. `npm run dev` for having nodemon running to the server restarting automatically on file changes.
 
 
 ## Other Commands
-* `npm run start` - start as standard mode the server (without nodemon)
-* `npm run build` - compile the TS files
+* `npm run start` - start as standard mode the server (without nodemon). Server doesn't restart on file changes.
+* `npm run build` - compile the TS files.
 
 
 ## Author
