@@ -1,12 +1,17 @@
 # AI Proxy Server
 
-Simple backend proxy API to handle requests between your macOS SwiftUI app and the Mistral AI API (or another third-party AI API)
+Simple backend proxy API to handle requests between your macOS SwiftUI app and the Mistral AI API (or another third-party AI API).
 
 
 ## Get Started
 
 1. `npm install` to install the dependencies
 2. `npm run dev` for having nodemon running to the server restarting automatically on file changes
+
+
+## Other Commands
+* `npm run start` - start as standard mode the server (without nodemon)
+* `npm run build` - compile the TS files
 
 
 ## Author
