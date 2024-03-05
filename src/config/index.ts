@@ -1,4 +1,3 @@
-import { jwt } from "jsonwebtoken";
 import dotenv from "dotenv";
 
 // load environment variables from .env file
