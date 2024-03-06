@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { AIProvidable, PayloadProps, Role } from './api.type';
 import { logger } from 'src/logger';
 
@@ -24,8 +24,8 @@ export class MistralAIAdapter implements AIProvidable {
       });
 
       return content?.trim() || '';
-    } catch (error: any) {
-      console.error('Error in MistralAiAdapter:', error);
+    } catch (error: any | AxiosError) {
+      console.error('MistralAiAdapter Error:', axios.isAxiosError(error) ? error?.response?.data?.message : error.message);
       throw new Error('Error processing AI query');
     }
   }
