@@ -15,7 +15,15 @@ export class MistralAIAdapter implements AIProvidable {
     const payload = this.buildPayload(query);
 
     try {
-      const { data: { choices: [ { message: { content } } ] } } = await axios.post(this.chatCompletionUrl, payload, {
+      const {
+        data: {
+          choices: [
+            {
+              message: { content },
+            },
+          ],
+        },
+      } = await axios.post(this.chatCompletionUrl, payload, {
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
           Accept: 'application/json',
@@ -24,8 +32,8 @@ export class MistralAIAdapter implements AIProvidable {
       });
 
       return content?.trim() || '';
-    } catch (error: any | AxiosError) {
-      console.error('MistralAiAdapter Error:', axios.isAxiosError(error) ? error?.response?.data?.message : error.message);
+    } catch (e: any | AxiosError) {
+      console.error('MistralAiAdapter Error:', axios.isAxiosError(e) ? e?.response?.data?.message : e.message);
       throw new Error('Error processing AI query');
     }
   }
