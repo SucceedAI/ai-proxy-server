@@ -6,6 +6,7 @@
   "homepage": "https://github.com/SucceedAI",
   "private": true,
   "scripts": {
+    "prod": "npm run build && node dist/server.js",
     "start": "ts-node src/server.ts",
     "build": "tsc",
     "dev": "nodemon src/server.ts",

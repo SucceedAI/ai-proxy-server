@@ -10,7 +10,8 @@ Simple backend proxy API to handle requests between your macOS SwiftUI app and t
 ## Other Commands
 
 - `npm run start` - start as standard mode the server (without nodemon). Server doesn't restart on file changes.
-- `npm run build` - compile the TS files.
+- `npm run prod` - more optimized for a production environment. This command will first run `npm run build` and then use `node` to execute the JavaScript compiled file.
+- `npm run build` - only to compile the TS files into ones.
 
 ### Utility
 
