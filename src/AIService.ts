@@ -1,4 +1,5 @@
 import { AIProvidable, MistralAIAdapter, OpenAIAdapter } from './ai/api-providers';
+import { ClaudeAIAdapter } from './ai/api-providers/ClaudeAIAdapter';
 import { config } from './config';
 
 export namespace AIService {
@@ -11,6 +12,10 @@ export namespace AIService {
 
     if (config.openAiApiEnabled) {
       return new OpenAIAdapter(config.openAiApiKey, pickModelId(config.openAiModel));
+    }
+
+    if (config.claudeAiApiEnabled) {
+      return new ClaudeAIAdapter(config.claudeAiApiKey, pickModelId(config.claudeAiModel));
     }
 
     throw new Error('Not AI Provider Enabled');

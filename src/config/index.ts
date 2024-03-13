@@ -18,6 +18,11 @@ interface ConfigProps {
   openAiApiEnabled: boolean;
   openAiApiKey: string;
   openAiModel: string;
+
+  // Claude AI
+  claudeAiApiEnabled: boolean;
+  claudeAiApiKey: string;
+  claudeAiModel: string;
 }
 
 const config: ConfigProps = {
@@ -32,6 +37,10 @@ const config: ConfigProps = {
   openAiApiEnabled: !!process.env.OPEN_AI_API_ENABLED,
   openAiApiKey: process.env.OPEN_AI_API_KEY || '',
   openAiModel: process.env.OPEN_AI_MODEL || '',
+
+  claudeAiApiEnabled: !!process.env.CLAUDE_AI_API_ENABLED,
+  claudeAiApiKey: process.env.CLAUDE_AI_API_KEY || '',
+  claudeAiModel: process.env.CLAUDE_AI_MODEL || '',
 };
 
 export { config };
