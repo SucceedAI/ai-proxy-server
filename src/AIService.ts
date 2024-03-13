@@ -18,7 +18,7 @@ export namespace AIService {
       return new ClaudeAIAdapter(config.claudeAiApiKey, pickModelId(config.claudeAiModel));
     }
 
-    throw new Error('Not AI Provider Enabled');
+    throw new Error('No AI provider is enabled');
   };
 
   const pickModelId = (model: string): string => {
