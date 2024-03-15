@@ -30,7 +30,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   }
 
   try {
-    if (sid !== config.jwtToken) {
+    if ([config.jwtToken, config.browserExtensionSecret].includes(sid)) {
       throw new Error('Invalid token');
     }
 
