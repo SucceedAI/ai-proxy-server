@@ -1,6 +1,13 @@
 # AI Proxy Server
 
-Simple backend proxy API to handle requests between your macOS SwiftUI app and the Mistral AI API (or another third-party AI API).
+Simple backend proxy API to handle requests between your macOS SwiftUI app and the AI 3rd-party provider APIs (or another third-party AI API).
+
+Currently, includes the following AI APIs:
+
+* OpenAI
+* Mistral AI
+* Claude 3 (Anthropic)
+
 
 ## Get Started
 
@@ -20,6 +27,11 @@ Simple backend proxy API to handle requests between your macOS SwiftUI app and t
 
 ## Author
 
-Hi ツ I'm **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic problem-solver / senior software engineer living in Sydney 🦘 Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
+Hi there! ツ I'm **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic problem-solver / senior software engineer living in Sydney 🦘 Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
 
-Feel free to connect and reach me on [LinkedIn](https://www.linkedin.com/in/ph7enry/) 🚀
+Feel free to connect and reach me through [my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/) 🚀
+
+
+## License
+
+Distributed under the [MIT](https://opensource.org/license/mit) license. Happy coding! 🔥
