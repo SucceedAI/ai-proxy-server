@@ -1,8 +1,8 @@
 # AI Proxy Server
 
-Simple backend proxy API to handle requests between your macOS SwiftUI app and the AI 3rd-party provider APIs (or another third-party AI API).
+Simple backend proxy API to handle requests between a client app and AI 3rd-party provider APIs (such as OpenAI or Anthropic's Claude).
 
-Currently, includes the following AI APIs:
+At the moment, it includes the following AI APIs:
 
 * OpenAI
 * Mistral AI
@@ -25,11 +25,12 @@ Currently, includes the following AI APIs:
 - `npm run prettier:check`– check any formatting/indentation errors.
 - `npm run prettier:fix` – fix any formatting/indentation errors.
 
+
 ## Author
 
 Hi there! ツ I'm **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic problem-solver / senior software engineer living in Sydney 🦘 Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
 
-Feel free to connect and reach me through [my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/) 🚀
+Feel free to connect and reach me through **[my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/)** 🚀
 
 
 ## License
