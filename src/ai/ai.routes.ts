@@ -28,7 +28,7 @@ router.post('/query', async (req: Request, res: Response) => {
     res.status(StatusCodes.OK).json(body);
   } catch (error) {
     logger.error('Error:', error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: 'Error processing request' });
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error processing request' });
   }
 });
 
