@@ -33,5 +33,5 @@ app.use('/v1', mainRoutes);
 app.use('/v1/ai', authMiddleware, aiRoutes);
 
 app.listen(config.port, () => {
-  logger.info(`Server is running on http://localhost:${config.port}`);
+  logger.info(`Server is running on port ${config.port}`);
 });
