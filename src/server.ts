@@ -12,6 +12,7 @@ import { logger } from './logger';
 
 const app: Express = express();
 
+// Set rate limiter - very important to prevent abuse
 const rateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
