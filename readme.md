@@ -1,6 +1,6 @@
 # AI Proxy Server
 
-Simple backend proxy API to handle requests between a client app and AI 3rd-party provider APIs (such as OpenAI or Anthropic's Claude).
+Simple backend proxy API to handle requests between a client app and AI 3rd-party provider APIs (such as OpenAI and Anthropic's Claude).
 
 At the moment, it includes the following AI APIs:
 
@@ -31,10 +31,10 @@ Hi there! ツ I'm **[Pierre-Henry Soria](https://pierrehenry.be)**. A super pass
 
 # About the Project
 
-**Succeed AI** is part of the challenge `#AIFreeProjects`, a group of **7 artificial intelligence projects** I have engaged to open source and transparently release on GitHub / YouTube with at least 20-hour/week commitment. Hope you enjoy 🤗
+**Succeed AI** is part of the challenge `#AI-Free-Projects`, a group of **7 artificial intelligence projects** I have engaged to open source and transparently release on GitHub / YouTube with at least 20-hour/week commitment. Hope you enjoy 🤗
 
 Feel free to connect, and reach me at **[my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/)** 🚀
 
 ## License
 
-Distributed under the [MIT](https://opensource.org/license/mit) license. Happy coding! 🔥
+Distributed under [MIT](https://opensource.org/license/mit) license 🎉 Happy, happy coding! 🤠
