@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { UserService } from 'src/user';
+import { LicenseService } from 'src/user';
 
 // Hack: nodemon wants this here
 declare global {
@@ -15,13 +15,19 @@ export const licensingMiddleware = (req: Request, res: Response, next: NextFunct
   const errorMessage: string = 'Access denied. License key not valid';
 
   // Retrieve license key from header
-  const licenseKeyHeader: string = req.headers.License as string;
-  if (!licenseKeyHeader?.length) {
+  const licenseHeader: string = req.headers.License as string;
+  if (!licenseHeader?.length) {
+    return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
+  }
+
+  // License Id and License Key are both receive from License header separated by a colon
+  const [licenseIdHeader, licenseKeyHeader] = (req.headers.License as string).split(':');
+  if (!licenseKeyHeader?.length || !licenseIdHeader?.length) {
     return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 
   try {
-    if (!UserService.isUserLicenseKeyFound(licenseKeyHeader)) {
+    if (!LicenseService.isUserLicenseKeyValid(licenseIdHeader, licenseKeyHeader)) {
       throw new Error(errorMessage);
     }
   } catch (e: unknown) {

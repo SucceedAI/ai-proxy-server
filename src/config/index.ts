@@ -33,7 +33,7 @@ const config: ConfigProps = {
   port: process.env.APP_PORT || 3000,
   jwtToken: process.env.JWT_SECRET || 'jwt-secret',
   browserExtensionSecret: process.env.BROWSER_EXTENSION_SECRET || 'browser-secret',
-  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '1h',
+  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '3h',
 
   mistralAiApiEnabled: !!process.env.MISTRAL_AI_API_ENABLED,
   mistralAiApiKey: process.env.MISTRAL_AI_API_KEY || '',

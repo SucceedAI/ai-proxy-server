@@ -2,19 +2,19 @@ import axios from 'axios';
 import { config } from '../config';
 import { axiosError } from 'src/logger/axios-error.helper';
 
-// User Service communicating directly with User's LemonSqueezy's account
-export namespace UserService {
-  const apiUrl = '';
+// License Service communicating directly with Licensing LemonSqueezy's user account
+export namespace LicenseService {
+  const apiUrl = 'https://api.lemonsqueezy.com/v1/license-keys/';
 
-  export const isUserLicenseKeyFound = async (licenseKey: string): Promise<boolean> => {
+  export const isUserLicenseKeyValid = async (licenseId: string, licenseKey: string): Promise<boolean> => {
     // make request to Lemonsqueezy licensing and retrieve back if license was found or not
-
-    const payload = {};
-
     try {
       const {
-        data: { license: licenseKey },
-      } = await axios.post(apiUrl, payload, {
+        data: {
+          attributes: { key: userLicenseKey },
+          status,
+        },
+      } = await axios.get(apiUrl + licenseId, {
         headers: {
           Authorization: `Bearer ${config.lemonSqueezyApiKey}`,
           Accept: 'application/vnd.api+json',
@@ -22,12 +22,10 @@ export namespace UserService {
         },
       });
 
-      return licenseKey ?? false;
+      return status === 'active' && userLicenseKey === licenseKey;
     } catch (e: any) {
       axiosError(e, 'LemonSqueezy Error:');
       throw new Error('Error looking up user license');
     }
-
-    return true;
   };
 }
