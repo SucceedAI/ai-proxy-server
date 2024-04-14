@@ -15,7 +15,7 @@ export const licensingMiddleware = (req: Request, res: Response, next: NextFunct
   const errorMessage: string = 'Access denied. License key not valid';
 
   // Retrieve license key from header
-  const licenseKeyHeader: string | undefined = req.headers.license;
+  const licenseKeyHeader: string = req.headers.License as string;
   if (!licenseKeyHeader?.length) {
     return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }

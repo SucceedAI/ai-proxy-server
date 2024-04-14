@@ -1,1 +1,1 @@
-export { UserService } from './user.service.ts';
+export { UserService } from './user.service';

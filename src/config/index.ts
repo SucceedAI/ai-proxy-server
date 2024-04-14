@@ -24,6 +24,9 @@ interface ConfigProps {
   claudeAiApiEnabled: boolean;
   claudeAiApiKey: string;
   claudeAiModel: string;
+
+  // Lemon Squeezy API
+  lemonSqueezyApiKey: string;
 }
 
 const config: ConfigProps = {
@@ -43,6 +46,8 @@ const config: ConfigProps = {
   claudeAiApiEnabled: !!process.env.CLAUDE_AI_API_ENABLED,
   claudeAiApiKey: process.env.CLAUDE_AI_API_KEY || '',
   claudeAiModel: process.env.CLAUDE_AI_MODEL || '',
+
+  lemonSqueezyApiKey: process.env.LEMON_SQUEEZY_API_KEY || '',
 };
 
 export { config };

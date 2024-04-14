@@ -6,7 +6,7 @@ import helmet from 'helmet';
 
 import { router as mainRoutes } from './main.routes';
 import { router as aiRoutes } from './ai';
-import { authMiddleware } from './middlewares/authMiddleware';
+import { authMiddleware } from './middlewares/auth.middleware';
 import { config } from './config';
 import { logger } from './logger';
 
