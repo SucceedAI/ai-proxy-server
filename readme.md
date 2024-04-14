@@ -12,6 +12,7 @@ At the moment, it includes the following AI APIs:
 
 1. `npm install` to install the dependencies.
 2. `npm run dev` for having nodemon running to the server restarting automatically on file changes.
+3. Rename `.env.dist` to `.env` and edit the details in there.
 
 ### Other Commands
 
@@ -27,7 +28,6 @@ At the moment, it includes the following AI APIs:
 ## Author
 
 Hi there! ツ I'm **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic problem-solver / senior software engineer living in Sydney 🦘 Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
-
 
 # About the Project
 
