@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { LicenseService } from 'src/user';
+import { LicenseService } from '../user';
 
 // Hack: nodemon wants this here
 declare global {

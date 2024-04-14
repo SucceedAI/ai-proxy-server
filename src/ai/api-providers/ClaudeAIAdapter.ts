@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { AIProvidable, PayloadProps, Role } from './api.type';
-import { axiosError } from 'src/logger/axios-error.helper';
+import { axiosError } from '../../logger/axios-error.helper';
 
 export class ClaudeAIAdapter implements AIProvidable {
   private readonly chatRole: Role = 'user';

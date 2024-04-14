@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { config } from '../config';
-import { axiosError } from 'src/logger/axios-error.helper';
+import { axiosError } from '../logger/axios-error.helper';
+import { LicenseStatus } from './license.type';
 
 // License Service communicating directly with Licensing LemonSqueezy's user account
 export namespace LicenseService {
@@ -22,7 +23,7 @@ export namespace LicenseService {
         },
       });
 
-      return status === 'active' && userLicenseKey === licenseKey;
+      return status === LicenseStatus.ACTIVE && userLicenseKey === licenseKey;
     } catch (e: any) {
       axiosError(e, 'LemonSqueezy Error:');
       throw new Error('Error looking up user license');
