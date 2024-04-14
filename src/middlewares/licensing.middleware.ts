@@ -15,14 +15,14 @@ export const licensingMiddleware = (req: Request, res: Response, next: NextFunct
   const errorMessage: string = 'Access denied. License key not valid';
 
   // Retrieve license key from header
-  const licenseHeader: string = req.headers.License as string;
+  const licenseHeader: string = req.headers.license as string;
   if (!licenseHeader?.length) {
     return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 
   // License Id and License Key are both receive from License header separated by a colon
-  const [licenseIdHeader, licenseKeyHeader] = (req.headers.License as string).split(':');
-  if (!licenseKeyHeader?.length || !licenseIdHeader?.length) {
+  const [licenseIdHeader, licenseKeyHeader] = licenseHeader.split(':');
+  if (!licenseIdHeader?.length || !licenseKeyHeader?.length) {
     return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 
