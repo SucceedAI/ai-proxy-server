@@ -28,7 +28,12 @@ At the moment, it includes the following AI APIs:
 
 Hi there! ツ I'm **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic problem-solver / senior software engineer living in Sydney 🦘 Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
 
-Feel free to connect and reach me through **[my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/)** 🚀
+
+# About the Project
+
+**Succeed AI** is part of the challenge `#AIFreeProjects`, a group of **7 artificial intelligence projects** I have engaged to open source and transparently release on GitHub / YouTube with at least 20-hour/week commitment. Hope you enjoy 🤗
+
+Feel free to connect, and reach me at **[my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/)** 🚀
 
 ## License
 
