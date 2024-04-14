@@ -1,6 +1,6 @@
-import { AIProvidable, MistralAIAdapter, OpenAIAdapter } from './ai/api-providers';
-import { ClaudeAIAdapter } from './ai/api-providers/ClaudeAIAdapter';
-import { config } from './config';
+import { AIProvidable, MistralAIAdapter, OpenAIAdapter } from './api-providers';
+import { ClaudeAIAdapter } from './api-providers/ClaudeAIAdapter';
+import { config } from '../config';
 
 export namespace AIService {
   // Initialize the AI provider. We can switch to different providers as needed

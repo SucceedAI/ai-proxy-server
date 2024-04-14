@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { AIProvidable, PayloadProps, Role } from './api.type';
-import { logger } from 'src/logger';
+import { axiosError } from 'src/logger/axios-error.helper';
 
 export class MistralAIAdapter implements AIProvidable {
   private readonly chatRole: Role = 'user';
@@ -33,7 +33,7 @@ export class MistralAIAdapter implements AIProvidable {
 
       return content?.trim() || '';
     } catch (e: any | AxiosError) {
-      console.error('MistralAiAdapter Error:', axios.isAxiosError(e) ? e?.response?.data?.message : e.message);
+      axiosError(e, 'MistralAiAdapter Error:');
       throw new Error('Error processing AI query');
     }
   }
