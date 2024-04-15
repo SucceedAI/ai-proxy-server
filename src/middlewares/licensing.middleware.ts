@@ -30,9 +30,8 @@ export const licensingMiddleware = (req: Request, res: Response, next: NextFunct
     if (!LicenseService.isUserLicenseKeyValid(licenseIdHeader, licenseKeyHeader)) {
       throw new Error(errorMessage);
     }
+    next();
   } catch (e: unknown) {
-    res.status(StatusCodes.BAD_REQUEST).send(errorMessage);
+    return res.status(StatusCodes.BAD_REQUEST).send(errorMessage);
   }
-
-  next();
 };

@@ -39,6 +39,6 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     // req.user = decoded; // Attach user data to the request object
     next();
   } catch (e: unknown) {
-    res.status(StatusCodes.BAD_REQUEST).send('Invalid token.');
+    return res.status(StatusCodes.BAD_REQUEST).send('Invalid token.');
   }
 };

@@ -26,7 +26,8 @@ export namespace LicenseService {
       return status === LicenseStatus.ACTIVE && userLicenseKey === licenseKey;
     } catch (e: any) {
       axiosError(e, 'LemonSqueezy Error:');
-      throw new Error('Error looking up user license');
+
+      return false;
     }
   };
 }
