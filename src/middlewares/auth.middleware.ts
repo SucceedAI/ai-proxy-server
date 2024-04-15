@@ -17,7 +17,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   const errorMessage: string = 'Access denied. Token not found';
 
   // Retrieve authorization token
-  const authHeader: string | undefined = req.headers.authorization;
+  const authHeader: string | undefined = req.header('authorization');
   const tokenPrefix: string = 'Bearer ';
 
   if (!authHeader?.startsWith(tokenPrefix)) {
