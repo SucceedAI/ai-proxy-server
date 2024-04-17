@@ -13,6 +13,11 @@ export class MistralAIAdapter implements AIProvidable {
 
   public async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);
+    const headers = {
+      Authorization: `Bearer ${this.apiKey}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
 
     try {
       const {
@@ -24,11 +29,7 @@ export class MistralAIAdapter implements AIProvidable {
           ],
         },
       } = await axios.post(this.chatCompletionUrl, payload, {
-        headers: {
-          Authorization: `Bearer ${this.apiKey}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers,
       });
 
       return content?.trim() || '';
