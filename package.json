@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "prod": "npm run build && node dist/server.js",
-    "start": "ts-node src/server.ts",
+    "start": "ts-node src/server.ts --transpile-only",
     "build": "tsc",
     "dev": "nodemon src/server.ts",
     "prettier:check": "./node_modules/.bin/prettier --check \"src/**/*.{ts,js,json}\" \"!package.json\"",
