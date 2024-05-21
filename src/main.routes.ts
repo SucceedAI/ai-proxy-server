@@ -5,7 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
 
-router.post('/token-generator', (req, res) => {
+router.post('/token-generator', (req: Request, res: Response) => {
   // Authentication logic here...
 
   const token = jwt.sign(
@@ -21,12 +21,12 @@ router.post('/token-generator', (req, res) => {
   res.status(StatusCodes.OK).json({ token });
 });
 
-router.get('/health', async (req: Request, res: Response) => {
+router.get('/health', (req: Request, res: Response) => {
   res.status(StatusCodes.OK).json({ health: true });
 });
 
-router.get('/version', async (req: Request, res: Response) => {
-  // get version from package.json
+router.get('/version', (req: Request, res: Response) => {
+  // TODO get version from package.json
 
   res.status(StatusCodes.OK).json({ version: 1.0 });
 });
