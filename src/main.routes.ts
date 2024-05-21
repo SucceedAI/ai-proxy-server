@@ -26,9 +26,16 @@ router.get('/health', (req: Request, res: Response) => {
 });
 
 router.get('/version', (req: Request, res: Response) => {
-  // TODO get version from package.json
+  try {
+    // Retrieve version from package.json
+    const packageJson = require('../package.json');
+    const version = packageJson.version;
 
-  res.status(StatusCodes.OK).json({ version: 1.0 });
+    res.status(StatusCodes.OK).json({ version });
+  } catch (error) {
+    console.error('Failed to retrieve version:', error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Failed to retrieve version' });
+  }
 });
 
 export { router };
