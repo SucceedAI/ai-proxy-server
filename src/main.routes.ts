@@ -1,9 +1,13 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { config } from './config';
+import { config, messages } from './config';
 import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
+
+router.get('/', (req: Request, res: Response) => {
+  res.send(messages.downloadApp);
+});
 
 router.post('/token-generator', (req: Request, res: Response) => {
   // Authentication logic here...

@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import { router as mainRoutes } from './main.routes';
 import { router as aiRoutes } from './ai';
 import { authMiddleware } from './middlewares/auth.middleware';
-import { config } from './config';
+import { config, messages } from './config';
 import { logger } from './logger';
 
 const app: Express = express();
@@ -31,7 +31,7 @@ app.use(helmet());
 app.use(cors());
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hi 👋 Download the app at https://succeedai.live');
+  res.send(messages.downloadApp);
 });
 
 app.use('/v1', mainRoutes);
