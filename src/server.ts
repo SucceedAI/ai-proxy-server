@@ -1,6 +1,6 @@
+import express, { Express, Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
-import express, { Express } from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 
@@ -29,6 +29,10 @@ app.use(express.json());
 
 app.use(helmet());
 app.use(cors());
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hi 👋 Download the app at https://succeedai.live');
+});
 
 app.use('/v1', mainRoutes);
 app.use('/v1/ai', authMiddleware, aiRoutes);
