@@ -6,6 +6,7 @@ import { StatusCodes } from 'http-status-codes';
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response) => {
+  // If someone tries to access the API root URL, respond with a message to download the app
   res.send(messages.downloadApp);
 });
 
