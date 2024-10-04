@@ -1,7 +1,7 @@
 {
   "name": "ai-proxy-server",
   "version": "1.0.0",
-  "description": "Simple backend proxy API to handle requests between your macOS SwiftUI app and the Mistral AI API (or another third-party AI API)",
+  "description": "Simple proxy API backend to handle requests between the macOS SwiftUI app and 3rd-party AI APIs, such as Mistral AI, Claude, OpenAI",
   "author": "Pierre-Henry Soria",
   "homepage": "https://github.com/SucceedAI",
   "private": true,
