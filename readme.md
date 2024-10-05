@@ -34,7 +34,7 @@ At the moment, it includes the following AI APIs 🚀
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://ph7.me "Pierre-Henry Soria, Software Developer")
 
-Made with ❤️ by **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic problem-solver / senior software engineer living in Sydney 🦘 Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
+Made with ❤️ by **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic Problem-Solver / Senior Software Engineer. Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
 
 
 # About the Project
