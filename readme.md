@@ -1,6 +1,6 @@
-# AI Proxy Server for Securely Client Applications
+# AI Proxy Server for Serving Securely Client Applications
 
-Simple backend proxy API to handle requests between a client app and AI 3rd-party provider APIs (such as OpenAI and Anthropic's Claude).
+Simple backend proxy API to handle securely requests between a client app and AI 3rd-party provider APIs (such as OpenAI, MistralAI, and Anthropic's Claude).
 
 At the moment, it includes the following AI APIs:
 
