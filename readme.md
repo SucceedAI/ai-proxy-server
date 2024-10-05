@@ -1,4 +1,4 @@
-# AI Proxy Server
+# AI Proxy Server for Securely Client Applications
 
 Simple backend proxy API to handle requests between a client app and AI 3rd-party provider APIs (such as OpenAI and Anthropic's Claude).
 
