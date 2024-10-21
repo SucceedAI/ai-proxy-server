@@ -47,6 +47,7 @@ export class MistralAIAdapter implements AIProvidable {
     const payload = {
       model: this.modelId,
       messages: [{ role: this.chatRole, content: query }],
+      //max_tokens: 900,
     };
 
     return payload;
