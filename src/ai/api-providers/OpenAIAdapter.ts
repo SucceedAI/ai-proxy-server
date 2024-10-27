@@ -35,6 +35,7 @@ export class OpenAIAdapter implements AIProvidable {
     const payload = {
       messages: [{ role: this.chatRole, content: query }],
       model: this.modelId,
+      //max_completion_tokens: 1000,
     };
 
     return payload;
