@@ -1,4 +1,10 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import OpenAI from 'openai';
+
 import { AIProvidable, PayloadProps, Role } from './api.type';
 import { logger } from '../../logger';
 

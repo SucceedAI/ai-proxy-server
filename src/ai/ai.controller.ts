@@ -1,4 +1,9 @@
-import express, { Request, Response } from 'express';
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
+import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
 import { AIQueryRequest, BodyResponse } from './request.type';

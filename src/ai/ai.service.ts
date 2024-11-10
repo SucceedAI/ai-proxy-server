@@ -1,3 +1,8 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import { AIProvidable, MistralAIAdapter, OpenAIAdapter } from './api-providers';
 import { ClaudeAIAdapter } from './api-providers/ClaudeAIAdapter';
 import { config } from '../config';

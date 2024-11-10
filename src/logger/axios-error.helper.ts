@@ -1,3 +1,8 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import axios, { AxiosError } from 'axios';
 import { logger } from './index';
 

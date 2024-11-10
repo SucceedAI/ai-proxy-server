@@ -1,3 +1,8 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import axios from 'axios';
 import { config } from '../config';
 import { axiosError } from '../logger/axios-error.helper';

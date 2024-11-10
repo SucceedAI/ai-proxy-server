@@ -1,4 +1,10 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import axios, { AxiosError } from 'axios';
+
 import { AIProvidable, PayloadProps, Role } from './api.type';
 import { axiosError } from '../../logger/axios-error.helper';
 
@@ -9,7 +15,7 @@ export class MistralAIAdapter implements AIProvidable {
   constructor(
     private apiKey: string,
     private modelId: string
-  ) {}
+  ) { }
 
   public async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);
