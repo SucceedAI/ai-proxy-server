@@ -1,3 +1,8 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { config, messages } from './config';

@@ -1,3 +1,8 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import express, { Express, Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
