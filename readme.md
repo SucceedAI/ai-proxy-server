@@ -1,6 +1,6 @@
-# AI Proxy Server for Serving Securely Client Applications
+# SucceedAI: An AI Proxy API that Securely Serves Client Applications
 
-Simple backend proxy API to handle securely requests between a client app and AI 3rd-party provider APIs (such as OpenAI, MistralAI, and Anthropic's Claude).
+SucceedAI API is a proxy backend API that securely handles requests between a client app and AI 3rd-party provider APIs (such as OpenAI, MistralAI, and Anthropic's Claude).
 
 
 At the moment, it includes the following AI APIs 🚀
