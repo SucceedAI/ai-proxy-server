@@ -1,3 +1,8 @@
+/**
+ * @copyright   (c) Pierre-Henry Soria <https://ph7.me>
+ * @license     MIT <https://opensource.org/license/mit>
+ */
+
 import dotenv from 'dotenv';
 
 // load environment variables from .env file
@@ -33,7 +38,7 @@ const config: ConfigProps = {
   port: process.env.APP_PORT || 3000,
   jwtToken: process.env.JWT_SECRET || 'jwt-secret',
   browserExtensionSecret: process.env.BROWSER_EXTENSION_SECRET || 'browser-secret',
-  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '3h',
+  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '3h', // if env is not set, JWT expiry time fallback is 3 hours
 
   mistralAiApiEnabled: !!process.env.MISTRAL_AI_API_ENABLED,
   mistralAiApiKey: process.env.MISTRAL_AI_API_KEY || '',
