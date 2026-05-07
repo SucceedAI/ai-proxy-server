@@ -13,22 +13,30 @@ import { logger } from '../logger';
 
 export namespace AIController {
   export const query = async (req: Request, res: Response): Promise<any> => {
-    let aiProvider: AIProvidable = AIService.pickAIProvider();
-
     const { query, systemInfo }: AIQueryRequest = req.body;
+    const trimmedQuery = query?.trim();
 
-    if (!query?.length) {
+    if (!trimmedQuery?.length) {
       return res.status(StatusCodes.BAD_REQUEST).send('Missing query in the payload');
     }
 
-    logger.info('Request System Info', systemInfo);
+    if (trimmedQuery.length > 12_000) {
+      return res.status(StatusCodes.REQUEST_TOO_LONG).send('Query is too large');
+    }
 
     try {
-      const queryResult: string = await aiProvider.query(query);
-      const model = aiProvider.getModel();
+      const aiProvider: AIProvidable = AIService.pickAIProvider();
+      logger.info(
+        { systemInfo, provider: aiProvider.getProviderName(), model: aiProvider.getModel() },
+        'AI query request'
+      );
 
-      const body: BodyResponse = { content: queryResult, model };
-      logger.info(body);
+      const queryResult: string = await aiProvider.query(trimmedQuery);
+      const model = aiProvider.getModel();
+      const provider = aiProvider.getProviderName();
+
+      const body: BodyResponse = { content: queryResult, model, provider };
+      logger.info({ provider, model }, 'AI query completed');
 
       res.status(StatusCodes.OK).json(body);
     } catch (error) {
