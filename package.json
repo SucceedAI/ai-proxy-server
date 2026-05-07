@@ -5,10 +5,15 @@
   "author": "Pierre-Henry Soria",
   "homepage": "https://github.com/SucceedAI",
   "private": true,
+  "engines": {
+    "node": ">=18.18"
+  },
   "scripts": {
+    "start": "node dist/server.js",
+    "start:dev": "ts-node src/server.ts --transpile-only",
     "prod": "npm run build && node dist/server.js",
-    "start": "ts-node src/server.ts --transpile-only",
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "dev": "nodemon src/server.ts",
     "prettier:check": "./node_modules/.bin/prettier --check \"src/**/*.{ts,js,json}\" \"!package.json\"",
     "prettier:fix": "./node_modules/.bin/prettier --write \"**/*.{ts,js,json}\" \"!package.json\""
