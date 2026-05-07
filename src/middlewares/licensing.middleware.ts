@@ -6,6 +6,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { LicenseService } from '../user';
+import { config } from '../config';
 
 // Hack: nodemon wants this here
 declare global {
@@ -16,8 +17,16 @@ declare global {
   }
 }
 
-export const licensingMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const licensingMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const errorMessage: string = 'Access denied. License key not valid';
+
+  if (!config.licenseCheckEnabled) {
+    return next();
+  }
+
+  if (!config.lemonSqueezyApiKey.length) {
+    return res.status(StatusCodes.SERVICE_UNAVAILABLE).send('License validation is not configured.');
+  }
 
   // Retrieve license key from header
   const licenseHeader: string = req.header('license') as string;
@@ -32,11 +41,12 @@ export const licensingMiddleware = (req: Request, res: Response, next: NextFunct
   }
 
   try {
-    if (!LicenseService.isUserLicenseKeyValid(licenseIdHeader, licenseKeyHeader)) {
+    const isValid = await LicenseService.isUserLicenseKeyValid(licenseIdHeader, licenseKeyHeader);
+    if (!isValid) {
       throw new Error(errorMessage);
     }
     next();
   } catch (e: unknown) {
-    return res.status(StatusCodes.BAD_REQUEST).send(errorMessage);
+    return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 };
