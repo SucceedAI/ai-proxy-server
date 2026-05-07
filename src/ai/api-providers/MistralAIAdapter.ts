@@ -9,13 +9,14 @@ import { AIProvidable, PayloadProps, Role } from './api.type';
 import { axiosError } from '../../logger/axios-error.helper';
 
 export class MistralAIAdapter implements AIProvidable {
+  private readonly providerName = 'mistral';
   private readonly chatRole: Role = 'user';
   private readonly chatCompletionUrl: string = 'https://api.mistral.ai/v1/chat/completions';
 
   constructor(
     private apiKey: string,
     private modelId: string
-  ) { }
+  ) {}
 
   public async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);
@@ -47,6 +48,10 @@ export class MistralAIAdapter implements AIProvidable {
 
   public getModel(): string {
     return this.modelId;
+  }
+
+  public getProviderName(): string {
+    return this.providerName;
   }
 
   public buildPayload(query: string): PayloadProps {
