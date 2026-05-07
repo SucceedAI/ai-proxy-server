@@ -19,18 +19,19 @@ const app: Express = express();
 
 // Set rate limiter - very important to prevent abuse
 const rateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  windowMs: config.rateLimitWindowMs,
+  max: config.rateLimitMax,
 });
 
+app.set('trust proxy', 1);
 app.use(compression());
 
 // Apply the rate limiting middleware to API calls only
 // Further info about rate limiting https://en.wikipedia.org/wiki/Rate_limiting
 app.use(rateLimiter);
 
-// Parse incoming JSON requests and add it in `req.body`
-app.use(express.json());
+// Parse incoming JSON requests and add it in `req.body`.
+app.use(express.json({ limit: config.requestBodyLimit }));
 
 app.use(helmet());
 app.use(cors());
