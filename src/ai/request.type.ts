@@ -12,4 +12,5 @@ export type SystemInfo = {
 export type BodyResponse = {
   content: string;
   model: string;
+  provider: string;
 };
