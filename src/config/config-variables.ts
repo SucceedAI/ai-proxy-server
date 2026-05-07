@@ -11,6 +11,10 @@ dotenv.config();
 interface ConfigProps {
   // App Server
   port: string | number;
+  nodeEnv: string;
+  requestBodyLimit: string;
+  rateLimitWindowMs: number;
+  rateLimitMax: number;
   jwtToken: string;
   browserExtensionSecret: string;
   jwtTokenExpiryTime: string;
@@ -24,6 +28,8 @@ interface ConfigProps {
   openAiApiEnabled: boolean;
   openAiApiKey: string;
   openAiModel: string;
+  openAiMaxOutputTokens: number;
+  openAiTimeoutMs: number;
 
   // Claude AI
   claudeAiApiEnabled: boolean;
@@ -31,28 +37,60 @@ interface ConfigProps {
   claudeAiModel: string;
 
   // Lemon Squeezy API
+  licenseCheckEnabled: boolean;
   lemonSqueezyApiKey: string;
 }
 
+const readEnv = (...names: string[]): string => {
+  for (const name of names) {
+    const value = process.env[name]?.trim();
+    if (value?.length) {
+      return value;
+    }
+  }
+
+  return '';
+};
+
+const parseBoolean = (value: string, fallback = false): boolean => {
+  if (!value.length) {
+    return fallback;
+  }
+
+  return ['1', 'true', 'yes', 'on'].includes(value.toLowerCase());
+};
+
+const parseNumber = (value: string, fallback: number): number => {
+  const parsed = Number.parseInt(value, 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
 const config: ConfigProps = {
-  port: process.env.APP_PORT || 3000,
-  jwtToken: process.env.JWT_SECRET || 'jwt-secret',
-  browserExtensionSecret: process.env.BROWSER_EXTENSION_SECRET || 'browser-secret',
-  jwtTokenExpiryTime: process.env.JWT_TOKEN_EXPIRY_TIME || '3h', // if env is not set, JWT expiry time fallback is 3 hours
+  port: readEnv('PORT', 'APP_PORT') || 3000,
+  nodeEnv: readEnv('NODE_ENV') || 'development',
+  requestBodyLimit: readEnv('REQUEST_BODY_LIMIT') || '64kb',
+  rateLimitWindowMs: parseNumber(readEnv('RATE_LIMIT_WINDOW_MS'), 15 * 60 * 1000),
+  rateLimitMax: parseNumber(readEnv('RATE_LIMIT_MAX'), 100),
+  jwtToken: readEnv('JWT_SECRET'),
+  browserExtensionSecret: readEnv('BROWSER_EXTENSION_SECRET'),
+  jwtTokenExpiryTime: readEnv('JWT_TOKEN_EXPIRY_TIME') || '3h',
 
-  mistralAiApiEnabled: !!process.env.MISTRAL_AI_API_ENABLED,
-  mistralAiApiKey: process.env.MISTRAL_AI_API_KEY || '',
-  mistralAiModel: process.env.MISTRAL_AI_MODEL || '',
+  mistralAiApiEnabled: parseBoolean(readEnv('MISTRAL_AI_API_ENABLED'), false),
+  mistralAiApiKey: readEnv('MISTRAL_AI_API_KEY'),
+  mistralAiModel: readEnv('MISTRAL_AI_MODEL') || 'mistral-large-latest',
 
-  openAiApiEnabled: !!process.env.OPEN_AI_API_ENABLED,
-  openAiApiKey: process.env.OPEN_AI_API_KEY || '',
-  openAiModel: process.env.OPEN_AI_MODEL || '',
+  openAiApiEnabled: parseBoolean(readEnv('OPENAI_API_ENABLED', 'OPEN_AI_API_ENABLED'), true),
+  openAiApiKey: readEnv('OPENAI_API_KEY', 'OPEN_AI_API_KEY'),
+  openAiModel: readEnv('OPENAI_MODEL', 'OPEN_AI_MODEL') || 'gpt-5.2',
+  openAiMaxOutputTokens: parseNumber(readEnv('OPENAI_MAX_OUTPUT_TOKENS', 'OPEN_AI_MAX_OUTPUT_TOKENS'), 1200),
+  openAiTimeoutMs: parseNumber(readEnv('OPENAI_TIMEOUT_MS', 'OPEN_AI_TIMEOUT_MS'), 45_000),
 
-  claudeAiApiEnabled: !!process.env.CLAUDE_AI_API_ENABLED,
-  claudeAiApiKey: process.env.CLAUDE_AI_API_KEY || '',
-  claudeAiModel: process.env.CLAUDE_AI_MODEL || '',
+  claudeAiApiEnabled: parseBoolean(readEnv('CLAUDE_AI_API_ENABLED'), false),
+  claudeAiApiKey: readEnv('CLAUDE_AI_API_KEY'),
+  claudeAiModel: readEnv('CLAUDE_AI_MODEL') || 'claude-3-5-sonnet-latest',
 
-  lemonSqueezyApiKey: process.env.LEMON_SQUEEZY_API_KEY || '',
+  licenseCheckEnabled: parseBoolean(readEnv('LICENSE_CHECK_ENABLED'), false),
+  lemonSqueezyApiKey: readEnv('LEMON_SQUEEZY_API_KEY'),
 };
 
 export { config };
