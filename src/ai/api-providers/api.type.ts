@@ -6,12 +6,10 @@
 export type AIProvidable = {
   query(query: string): Promise<string>;
   getModel(): string;
+  getProviderName(): string;
   buildPayload(query: string): PayloadProps;
 };
 
 export type Role = 'user' | 'system' | 'assistant';
 
-export type PayloadProps = {
-  model: string;
-  messages: Array<{ role: Role; content: string }>;
-};
+export type PayloadProps = Record<string, unknown>;
