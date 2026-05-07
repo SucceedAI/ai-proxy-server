@@ -32,7 +32,14 @@ router.post('/token-generator', (req: Request, res: Response) => {
 });
 
 router.get('/health', (req: Request, res: Response) => {
-  res.status(StatusCodes.OK).json({ health: true });
+  res.status(StatusCodes.OK).json({
+    health: true,
+    providerConfigured:
+      (config.openAiApiEnabled && !!config.openAiApiKey) ||
+      (config.mistralAiApiEnabled && !!config.mistralAiApiKey) ||
+      (config.claudeAiApiEnabled && !!config.claudeAiApiKey),
+    licenseCheckEnabled: config.licenseCheckEnabled,
+  });
 });
 
 router.get('/version', (req: Request, res: Response) => {
