@@ -4,7 +4,6 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-//import jwt from "jsonwebtoken";
 import { StatusCodes } from 'http-status-codes';
 
 import { config } from '../config';
@@ -20,6 +19,11 @@ declare global {
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const errorMessage: string = 'Access denied. Token not found';
+  const acceptedTokens = [config.jwtToken, config.browserExtensionSecret].filter(Boolean);
+
+  if (!acceptedTokens.length) {
+    return res.status(StatusCodes.SERVICE_UNAVAILABLE).send('Server authentication is not configured.');
+  }
 
   // Retrieve authorization token
   const authHeader: string | undefined = req.header('authorization');
@@ -35,15 +39,14 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   }
 
   try {
-    if (![config.jwtToken, config.browserExtensionSecret].includes(sid)) {
+    if (!acceptedTokens.includes(sid)) {
       throw new Error('Invalid token');
     }
 
-    // TODO Use JWT in the future increasing API access security
-    // const decoded = jwt.verify(sid, config.jwtToken);
-    // req.user = decoded; // Attach user data to the request object
+    // The macOS app uses a shared bearer token so Railway deployments can rotate
+    // one secret without forcing end-user credential handling in the client.
     next();
   } catch (e: unknown) {
-    return res.status(StatusCodes.BAD_REQUEST).send('Invalid token.');
+    return res.status(StatusCodes.UNAUTHORIZED).send('Invalid token.');
   }
 };
