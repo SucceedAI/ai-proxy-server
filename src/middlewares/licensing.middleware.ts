@@ -3,19 +3,10 @@
  * @license     MIT <https://opensource.org/license/mit>
  */
 
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { LicenseService } from '../user';
-import { config } from '../config';
-
-// Hack: nodemon wants this here
-declare global {
-  namespace Express {
-    export interface Request {
-      user?: any;
-    }
-  }
-}
+import { isUserLicenseKeyValid } from '../user/index.ts';
+import { config } from '../config/index.ts';
 
 export const licensingMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const errorMessage: string = 'Access denied. License key not valid';
@@ -41,7 +32,7 @@ export const licensingMiddleware = async (req: Request, res: Response, next: Nex
   }
 
   try {
-    const isValid = await LicenseService.isUserLicenseKeyValid(licenseIdHeader, licenseKeyHeader);
+    const isValid = await isUserLicenseKeyValid(licenseIdHeader, licenseKeyHeader);
     if (!isValid) {
       throw new Error(errorMessage);
     }

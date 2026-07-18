@@ -5,8 +5,8 @@
 
 import OpenAI from 'openai';
 
-import { AIProvidable, PayloadProps } from './api.type';
-import { logger } from '../../logger';
+import type { AIProvidable, PayloadProps } from './api.type.ts';
+import { logger } from '../../logger/index.ts';
 
 export class OpenAIAdapter implements AIProvidable {
   private readonly providerName = 'openai';
@@ -15,14 +15,15 @@ export class OpenAIAdapter implements AIProvidable {
     'Return only the final user-facing text requested by the user.',
     'Do not add prefaces, explanations, markdown fences, or quotes unless the user explicitly asks for them.',
   ].join(' ');
-  private client: OpenAI;
+  private readonly apiKey: string;
+  private readonly modelId: string;
+  private readonly maxOutputTokens: number;
+  private readonly client: OpenAI;
 
-  constructor(
-    private apiKey: string,
-    private modelId: string,
-    private maxOutputTokens: number,
-    timeoutMs: number
-  ) {
+  constructor(apiKey: string, modelId: string, maxOutputTokens: number, timeoutMs: number) {
+    this.apiKey = apiKey;
+    this.modelId = modelId;
+    this.maxOutputTokens = maxOutputTokens;
     this.client = new OpenAI({
       apiKey: this.apiKey,
       timeout: timeoutMs,

@@ -5,11 +5,11 @@
 
 import express from 'express';
 
-import { AIController } from '../ai.controller';
-import { licensingMiddleware } from '../../middlewares/licensing.middleware';
+import { query } from '../ai.controller.ts';
+import { licensingMiddleware } from '../../middlewares/licensing.middleware.ts';
 
 const router = express.Router();
 
-router.post('/query', licensingMiddleware, AIController.query);
+router.post('/query', licensingMiddleware, query);
 
 export { router };

@@ -36,6 +36,13 @@ interface ConfigProps {
   claudeAiApiKey: string;
   claudeAiModel: string;
 
+  // Meta Llama API
+  llamaApiEnabled: boolean;
+  llamaApiKey: string;
+  llamaModel: string;
+  llamaMaxCompletionTokens: number;
+  llamaTimeoutMs: number;
+
   // Lemon Squeezy API
   licenseCheckEnabled: boolean;
   lemonSqueezyApiKey: string;
@@ -88,6 +95,12 @@ const config: ConfigProps = {
   claudeAiApiEnabled: parseBoolean(readEnv('CLAUDE_AI_API_ENABLED'), false),
   claudeAiApiKey: readEnv('CLAUDE_AI_API_KEY'),
   claudeAiModel: readEnv('CLAUDE_AI_MODEL') || 'claude-3-5-sonnet-latest',
+
+  llamaApiEnabled: parseBoolean(readEnv('LLAMA_API_ENABLED'), false),
+  llamaApiKey: readEnv('LLAMA_API_KEY'),
+  llamaModel: readEnv('LLAMA_MODEL'),
+  llamaMaxCompletionTokens: parseNumber(readEnv('LLAMA_MAX_COMPLETION_TOKENS'), 1200),
+  llamaTimeoutMs: parseNumber(readEnv('LLAMA_TIMEOUT_MS'), 45_000),
 
   licenseCheckEnabled: parseBoolean(readEnv('LICENSE_CHECK_ENABLED'), false),
   lemonSqueezyApiKey: readEnv('LEMON_SQUEEZY_API_KEY'),

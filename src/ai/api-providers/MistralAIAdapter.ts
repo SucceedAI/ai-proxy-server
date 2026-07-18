@@ -3,20 +3,24 @@
  * @license     MIT <https://opensource.org/license/mit>
  */
 
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
+import type { AxiosError } from 'axios';
 
-import { AIProvidable, PayloadProps, Role } from './api.type';
-import { axiosError } from '../../logger/axios-error.helper';
+import type { AIProvidable, PayloadProps, Role } from './api.type.ts';
+import { axiosError } from '../../logger/axios-error.helper.ts';
 
 export class MistralAIAdapter implements AIProvidable {
   private readonly providerName = 'mistral';
   private readonly chatRole: Role = 'user';
   private readonly chatCompletionUrl: string = 'https://api.mistral.ai/v1/chat/completions';
 
-  constructor(
-    private apiKey: string,
-    private modelId: string
-  ) {}
+  private readonly apiKey: string;
+  private readonly modelId: string;
+
+  constructor(apiKey: string, modelId: string) {
+    this.apiKey = apiKey;
+    this.modelId = modelId;
+  }
 
   public async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);

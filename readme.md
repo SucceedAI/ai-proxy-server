@@ -41,7 +41,13 @@ Optional variables:
 - `LEMON_SQUEEZY_API_KEY`: required only when license checks are enabled.
 - `BROWSER_EXTENSION_SECRET`: optional secondary bearer token.
 
-Legacy Mistral and Claude adapters remain available but are disabled by default. Enable them only after setting their API keys and model names.
+Meta Llama, Mistral, and Claude adapters are also available but disabled by default. To use Meta's official Llama API, disable OpenAI and configure:
+
+- `LLAMA_API_ENABLED=true`
+- `LLAMA_API_KEY`: API key from the Meta Llama developer portal.
+- `LLAMA_MODEL`: a model ID available to your Llama API account.
+- `LLAMA_MAX_COMPLETION_TOKENS`: defaults to `1200`.
+- `LLAMA_TIMEOUT_MS`: defaults to `45000`.
 
 ## Local Development
 
@@ -51,7 +57,7 @@ npm install
 npm run dev
 ```
 
-Use `npm run start:dev` when you want the old non-watch TypeScript startup command.
+Node.js 22.18 or newer is required. Node runs the TypeScript source directly; `npm run dev` adds watch mode, while `npm start` runs without watching. TypeScript remains a development dependency for static type checking only.
 
 Health check:
 
@@ -92,8 +98,11 @@ Use `.env.railway.example` as the deployment checklist. Do not commit `.env`.
 ## Commands
 
 ```bash
+npm start
+npm run dev
 npm run build
 npm run typecheck
+npm test
 npm run prettier:check
 npm run prettier:fix
 npm run prod

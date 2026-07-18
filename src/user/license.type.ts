@@ -1,4 +1,4 @@
-export enum LicenseStatus {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
-}
+export const LicenseStatus = {
+  ACTIVE: 'active',
+  INACTIVE: 'inactive',
+} as const;

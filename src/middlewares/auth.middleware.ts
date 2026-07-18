@@ -3,19 +3,10 @@
  * @license     MIT <https://opensource.org/license/mit>
  */
 
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { config } from '../config';
-
-// Hack: nodemon wants this here
-declare global {
-  namespace Express {
-    export interface Request {
-      user?: any;
-    }
-  }
-}
+import { config } from '../config/index.ts';
 
 export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const errorMessage: string = 'Access denied. Token not found';

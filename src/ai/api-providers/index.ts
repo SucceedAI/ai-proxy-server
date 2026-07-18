@@ -1,3 +1,4 @@
-export { type AIProvidable as AIProvidable } from './api.type';
-export { MistralAIAdapter } from './MistralAIAdapter';
-export { OpenAIAdapter } from './OpenAIAdapter';
+export type { AIProvidable } from './api.type.ts';
+export { LlamaAIAdapter } from './LlamaAIAdapter.ts';
+export { MistralAIAdapter } from './MistralAIAdapter.ts';
+export { OpenAIAdapter } from './OpenAIAdapter.ts';

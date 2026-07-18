@@ -3,17 +3,18 @@
  * @license     MIT <https://opensource.org/license/mit>
  */
 
-import express, { Express, Request, Response } from 'express';
+import express from 'express';
+import type { Express, Request, Response } from 'express';
 import compression from 'compression';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 
-import { router as mainRoutes } from './main.routes';
-import { router as aiRoutes } from './ai';
-import { authMiddleware } from './middlewares/auth.middleware';
-import { config, messages } from './config';
-import { logger } from './logger';
+import { router as mainRoutes } from './main.routes.ts';
+import { router as aiRoutes } from './ai/index.ts';
+import { authMiddleware } from './middlewares/auth.middleware.ts';
+import { config, messages } from './config/index.ts';
+import { logger } from './logger/index.ts';
 
 const app: Express = express();
 

@@ -5,18 +5,21 @@
 
 import axios from 'axios';
 
-import { AIProvidable, PayloadProps, Role } from './api.type';
-import { axiosError } from '../../logger/axios-error.helper';
+import type { AIProvidable, PayloadProps, Role } from './api.type.ts';
+import { axiosError } from '../../logger/axios-error.helper.ts';
 
 export class ClaudeAIAdapter implements AIProvidable {
   private readonly providerName = 'claude';
   private readonly chatRole: Role = 'user';
   private readonly chatCompletionUrl: string = 'https://api.anthropic.com/v1/messages';
 
-  constructor(
-    private apiKey: string,
-    private modelId: string
-  ) {}
+  private readonly apiKey: string;
+  private readonly modelId: string;
+
+  constructor(apiKey: string, modelId: string) {
+    this.apiKey = apiKey;
+    this.modelId = modelId;
+  }
 
   public async query(query: string): Promise<string> {
     const payload = this.buildPayload(query);

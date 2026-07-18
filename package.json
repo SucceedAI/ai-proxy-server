@@ -1,21 +1,23 @@
 {
   "name": "ai-proxy-server",
   "version": "1.0.0",
-  "description": "Simple proxy API backend to handle requests between the macOS SwiftUI app and 3rd-party AI APIs, such as Mistral AI, Claude, OpenAI",
+  "description": "Simple proxy API backend to handle requests between the macOS SwiftUI app and AI providers including OpenAI, Meta Llama, Mistral AI, and Claude",
   "author": "Pierre-Henry Soria",
   "homepage": "https://github.com/SucceedAI",
   "private": true,
+  "type": "module",
   "engines": {
-    "node": ">=18.18"
+    "node": ">=22.18"
   },
   "scripts": {
-    "start": "node dist/server.js",
-    "start:dev": "ts-node src/server.ts --transpile-only",
-    "prod": "npm run build && node dist/server.js",
-    "build": "tsc",
+    "start": "node src/server.ts",
+    "start:dev": "node src/server.ts",
+    "prod": "npm start",
+    "build": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
-    "dev": "nodemon src/server.ts",
-    "prettier:check": "./node_modules/.bin/prettier --check \"src/**/*.{ts,js,json}\" \"!package.json\"",
+    "test": "node --test tests/*.test.ts",
+    "dev": "node --watch src/server.ts",
+    "prettier:check": "./node_modules/.bin/prettier --check \"src/**/*.{ts,js,json}\" \"tests/**/*.{ts,js,json}\" \"!package.json\"",
     "prettier:fix": "./node_modules/.bin/prettier --write \"**/*.{ts,js,json}\" \"!package.json\""
   },
   "dependencies": {
@@ -28,6 +30,7 @@
     "helmet": "^7.1.0",
     "http-status-codes": "^2.3.0",
     "jsonwebtoken": "^9.0.2",
+    "llama-api-client": "^0.3.0",
     "openai": "^6.36.0",
     "pino": "^8.19.0"
   },
@@ -37,9 +40,7 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.11.24",
-    "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.9.3"
   }
 }

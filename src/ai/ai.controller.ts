@@ -3,45 +3,43 @@
  * @license     MIT <https://opensource.org/license/mit>
  */
 
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import { AIQueryRequest, BodyResponse } from './request.type';
-import { AIProvidable } from './api-providers';
-import { AIService } from './ai.service';
-import { logger } from '../logger';
+import type { AIQueryRequest, BodyResponse } from './request.type.ts';
+import type { AIProvidable } from './api-providers/index.ts';
+import { pickAIProvider } from './ai.service.ts';
+import { logger } from '../logger/index.ts';
 
-export namespace AIController {
-  export const query = async (req: Request, res: Response): Promise<any> => {
-    const { query, systemInfo }: AIQueryRequest = req.body;
-    const trimmedQuery = query?.trim();
+export const query = async (req: Request, res: Response): Promise<any> => {
+  const { query, systemInfo }: AIQueryRequest = req.body;
+  const trimmedQuery = query?.trim();
 
-    if (!trimmedQuery?.length) {
-      return res.status(StatusCodes.BAD_REQUEST).send('Missing query in the payload');
-    }
+  if (!trimmedQuery?.length) {
+    return res.status(StatusCodes.BAD_REQUEST).send('Missing query in the payload');
+  }
 
-    if (trimmedQuery.length > 12_000) {
-      return res.status(StatusCodes.REQUEST_TOO_LONG).send('Query is too large');
-    }
+  if (trimmedQuery.length > 12_000) {
+    return res.status(StatusCodes.REQUEST_TOO_LONG).send('Query is too large');
+  }
 
-    try {
-      const aiProvider: AIProvidable = AIService.pickAIProvider();
-      logger.info(
-        { systemInfo, provider: aiProvider.getProviderName(), model: aiProvider.getModel() },
-        'AI query request'
-      );
+  try {
+    const aiProvider: AIProvidable = pickAIProvider();
+    logger.info(
+      { systemInfo, provider: aiProvider.getProviderName(), model: aiProvider.getModel() },
+      'AI query request'
+    );
 
-      const queryResult: string = await aiProvider.query(trimmedQuery);
-      const model = aiProvider.getModel();
-      const provider = aiProvider.getProviderName();
+    const queryResult: string = await aiProvider.query(trimmedQuery);
+    const model = aiProvider.getModel();
+    const provider = aiProvider.getProviderName();
 
-      const body: BodyResponse = { content: queryResult, model, provider };
-      logger.info({ provider, model }, 'AI query completed');
+    const body: BodyResponse = { content: queryResult, model, provider };
+    logger.info({ provider, model }, 'AI query completed');
 
-      res.status(StatusCodes.OK).json(body);
-    } catch (error) {
-      logger.error('Error:', error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error processing request' });
-    }
-  };
-}
+    res.status(StatusCodes.OK).json(body);
+  } catch (error) {
+    logger.error('Error:', error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error processing request' });
+  }
+};

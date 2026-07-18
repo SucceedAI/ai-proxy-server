@@ -3,9 +3,11 @@
  * @license     MIT <https://opensource.org/license/mit>
  */
 
-import express, { Request, Response } from 'express';
+import express from 'express';
+import type { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { config, messages } from './config';
+import packageJson from '../package.json' with { type: 'json' };
+import { config, messages } from './config/index.ts';
 import { StatusCodes } from 'http-status-codes';
 
 const router = express.Router();
@@ -37,15 +39,14 @@ router.get('/health', (req: Request, res: Response) => {
     providerConfigured:
       (config.openAiApiEnabled && !!config.openAiApiKey) ||
       (config.mistralAiApiEnabled && !!config.mistralAiApiKey) ||
-      (config.claudeAiApiEnabled && !!config.claudeAiApiKey),
+      (config.claudeAiApiEnabled && !!config.claudeAiApiKey) ||
+      (config.llamaApiEnabled && !!config.llamaApiKey && !!config.llamaModel),
     licenseCheckEnabled: config.licenseCheckEnabled,
   });
 });
 
 router.get('/version', (req: Request, res: Response) => {
   try {
-    // Retrieve version from package.json
-    const packageJson = require('../package.json');
     const version = packageJson.version;
 
     res.status(StatusCodes.OK).json({ version });

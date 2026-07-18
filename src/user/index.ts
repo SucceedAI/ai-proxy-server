@@ -1,1 +1,1 @@
-export { LicenseService } from './license.service';
+export { isUserLicenseKeyValid } from './license.service.ts';
