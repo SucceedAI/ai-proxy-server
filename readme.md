@@ -1,26 +1,36 @@
-# SucceedAI Proxy API
+# AI Proxy Server for Secure Client Applications
 
-**SucceedAI Proxy API** is the **secure backend** for the **SucceedAI macOS app**. It keeps **AI provider keys** private while connecting the app to OpenAI, Meta Llama, Mistral, and Claude.
+**SucceedAI Proxy API** securely connects the **SucceedAI macOS app** to **AI provider APIs** while keeping **private API keys** off the client.
 
-## AI Providers
+Supported providers 🚀
 
-OpenAI is enabled by default. Meta Llama, Mistral, and Claude can also be enabled when needed.
+- **OpenAI** (default)
+- **Meta Llama**
+- **Mistral AI**
+- **Claude** (Anthropic)
 
-See `.env.dist` for provider and security options.
+Provider and security settings are documented in `.env.dist`.
 
-## Local Development
-
-```bash
-cp .env.dist .env
-npm install
-npm run dev
-```
+## Get Started
 
 Requires Node.js 22.18 or newer.
 
+1. Copy `.env.dist` to `.env` and add your credentials.
+2. Run `npm install`.
+3. Run `npm run dev` to start the server in watch mode.
+
+### Other Commands
+
+- `npm start` — start the server normally.
+- `npm run prod` — start in production mode.
+- `npm run build` — validate the TypeScript build.
+- `npm run typecheck` — check TypeScript without running the server.
+- `npm test` — run the tests.
+- `npm run prettier:check` / `npm run prettier:fix` — check or fix formatting.
+
 ## Railway Deployment
 
-This repository includes `railway.json` for Railway config-as-code:
+Railway uses the included `railway.json` configuration:
 
 - Build command: `npm ci && npm run build`
 - Start command: `npm start`
@@ -39,25 +49,12 @@ railway up
 
 Use `.env.railway.example` as the deployment checklist. Do not commit `.env`.
 
-## Commands
-
-```bash
-npm start
-npm run dev
-npm run build
-npm run typecheck
-npm test
-npm run prettier:check
-npm run prettier:fix
-npm run prod
-```
-
-## Security Notes
+## Security
 
 - `JWT_SECRET` must not be empty in Railway.
 - `OPENAI_API_KEY` must exist only in Railway or local `.env`.
-- `LICENSE_CHECK_ENABLED=false` keeps the initial app flow working before paid license headers are shipped.
-- When `LICENSE_CHECK_ENABLED=true`, the app must send `License: <license-id>:<license-key>`.
+- License checks are optional and disabled by default.
+- When enabled, requests must include `License: <license-id>:<license-key>`.
 
 ## Author
 
