@@ -21,12 +21,12 @@ Requires Node.js 22.18 or newer.
 
 ### Other Commands
 
-- `npm start` — start the server normally.
-- `npm run prod` — start in production mode.
-- `npm run build` — validate the TypeScript build.
-- `npm run typecheck` — check TypeScript without running the server.
-- `npm test` — run the tests.
-- `npm run prettier:check` / `npm run prettier:fix` — check or fix formatting.
+- `npm start`: start the server normally.
+- `npm run prod`: start in production mode.
+- `npm run build`: validate the TypeScript build.
+- `npm run typecheck`: check TypeScript without running the server.
+- `npm test`: run the tests.
+- `npm run prettier:check` / `npm run prettier:fix`: check or fix formatting.
 
 ## Railway Deployment
 
