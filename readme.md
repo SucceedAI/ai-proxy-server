@@ -1,53 +1,12 @@
-# SucceedAI: An AI Proxy API that Securely Serves Client Applications
+# SucceedAI Proxy API
 
-**SucceedAI Proxy API** is the **production backend** used by the **macOS app**. It securely handles requests between client applications and **AI provider APIs**, keeping provider keys off the client. It validates the app bearer token, optionally validates Lemon Squeezy licenses, and returns the same response contract expected by the app:
+**SucceedAI Proxy API** is the **secure backend** for the **SucceedAI macOS app**. It keeps **AI provider keys** private while connecting the app to OpenAI, Meta Llama, Mistral, and Claude.
 
-```json
-{
-  "content": "Generated text",
-  "model": "gpt-5.2",
-  "provider": "openai"
-}
-```
+## AI Providers
 
-The macOS app calls `POST /v1/ai/query` with:
+OpenAI is enabled by default. Meta Llama, Mistral, and Claude can also be enabled when needed.
 
-```json
-{
-  "query": "Follow the instruction from the text in triple quotes below...",
-  "systemInfo": {
-    "osName": "macOS",
-    "osVersion": "15.x",
-    "model": "Mac"
-  }
-}
-```
-
-## Current AI Flow
-
-OpenAI is the default production provider. The backend uses the OpenAI Node SDK with the Responses API, which is the current primary OpenAI text-generation API.
-
-Required Railway variables:
-
-- `JWT_SECRET`: bearer token used by the signed macOS app.
-- `OPENAI_API_KEY`: OpenAI API key.
-- `OPENAI_MODEL`: defaults to `gpt-5.2`.
-
-Optional variables:
-
-- `OPENAI_MAX_OUTPUT_TOKENS`: defaults to `1200`.
-- `OPENAI_TIMEOUT_MS`: defaults to `45000`.
-- `LICENSE_CHECK_ENABLED`: defaults to `false`.
-- `LEMON_SQUEEZY_API_KEY`: required only when license checks are enabled.
-- `BROWSER_EXTENSION_SECRET`: optional secondary bearer token.
-
-Meta Llama, Mistral, and Claude adapters are also available but disabled by default. To use Meta's official Llama API, disable OpenAI and configure:
-
-- `LLAMA_API_ENABLED=true`
-- `LLAMA_API_KEY`: API key from the Meta Llama developer portal.
-- `LLAMA_MODEL`: a model ID available to your Llama API account.
-- `LLAMA_MAX_COMPLETION_TOKENS`: defaults to `1200`.
-- `LLAMA_TIMEOUT_MS`: defaults to `45000`.
+See `.env.dist` for provider and security options.
 
 ## Local Development
 
@@ -57,22 +16,7 @@ npm install
 npm run dev
 ```
 
-Node.js 22.18 or newer is required. Node runs the TypeScript source directly; `npm run dev` adds watch mode, while `npm start` runs without watching. TypeScript remains a development dependency for static type checking only.
-
-Health check:
-
-```bash
-curl http://localhost:3004/v1/health
-```
-
-Example app-compatible request:
-
-```bash
-curl -X POST http://localhost:3004/v1/ai/query \
-  -H "Authorization: Bearer $JWT_SECRET" \
-  -H "Content-Type: application/json" \
-  -d '{"query":"Rewrite this as a concise customer email: hello there","systemInfo":{"osName":"macOS"}}'
-```
+Requires Node.js 22.18 or newer.
 
 ## Railway Deployment
 
