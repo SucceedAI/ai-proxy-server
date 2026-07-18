@@ -1,6 +1,6 @@
 # SucceedAI: An AI Proxy API that Securely Serves Client Applications
 
-SucceedAI Proxy API is the production backend used by the macOS app. It securely handles requests between client applications and AI third-party provider APIs, keeping provider keys off the client. It validates the app bearer token, optionally validates Lemon Squeezy licenses, and returns the same response contract expected by the app:
+**SucceedAI Proxy API** is the **production backend** used by the **macOS app**. It securely handles requests between client applications and **AI provider APIs**, keeping provider keys off the client. It validates the app bearer token, optionally validates Lemon Squeezy licenses, and returns the same response contract expected by the app:
 
 ```json
 {
@@ -115,17 +115,13 @@ npm run prod
 - `LICENSE_CHECK_ENABLED=false` keeps the initial app flow working before paid license headers are shipped.
 - When `LICENSE_CHECK_ENABLED=true`, the app must send `License: <license-id>:<license-key>`.
 
-## License
-
-Distributed under the [MIT](https://opensource.org/license/mit) license 🎉 Wish you happy, happy coding! 🤠
-
 ## Author
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://ph7.me "Pierre-Henry Soria, Software Developer")
 
 Made with ❤️ by **[Pierre-Henry Soria](https://pierrehenry.be)**. A super passionate & enthusiastic Problem-Solver / Senior Software Engineer. Also a true cheese 🧀, ristretto ☕️, and dark chocolate lover! 😋
 
-[![@phenrysay](https://img.shields.io/badge/x-000000?style=for-the-badge&logo=x)](https://x.com/phenrysay "Follow Me on X")  [![pH-7](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pH-7 "My GitHub")  [![YouTube Video](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/cWBuZ4DXGK4 "YouTube SucceedAI Video")
+[![@phenrysay](https://img.shields.io/badge/x-000000?style=for-the-badge&logo=x)](https://x.com/phenrysay "Follow Me on X")  [![BlueSky](https://img.shields.io/badge/BlueSky-00A8E8?style=for-the-badge&logo=bluesky&logoColor=white)](https://bsky.app/profile/ph7.me "Follow Me on BlueSky")  [![pH-7](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pH-7 "My GitHub")  [![YouTube Video](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/cWBuZ4DXGK4 "YouTube SucceedAI Video")
 
 ### Presentation Video
 
@@ -136,3 +132,7 @@ Made with ❤️ by **[Pierre-Henry Soria](https://pierrehenry.be)**. A super pa
 **Succeed AI** is part of the challenge `#AI-Free-Projects`, a group of **7 artificial intelligence projects** I have engaged to open source and transparently release on GitHub / YouTube with at least 20-hour/week commitment. Hope you enjoy 🤗
 
 Feel free to connect, and reach me at **[my LinkedIn Profile](https://www.linkedin.com/in/ph7enry/)** 🚀
+
+## License
+
+Distributed under the [MIT](https://opensource.org/license/mit) license 🎉 Wish you happy, happy coding! 🤠
