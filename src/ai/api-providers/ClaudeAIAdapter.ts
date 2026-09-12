@@ -26,6 +26,7 @@ export class ClaudeAIAdapter implements AIProvidable {
 
     try {
       const { data } = await axios.post(this.chatCompletionUrl, payload, {
+        timeout: 45_000,
         headers: {
           'x-api-key': `${this.apiKey}`,
           'anthropic-version': '2023-06-01',

@@ -40,6 +40,7 @@ export class MistralAIAdapter implements AIProvidable {
           ],
         },
       } = await axios.post(this.chatCompletionUrl, payload, {
+        timeout: 45_000,
         headers,
       });
 
