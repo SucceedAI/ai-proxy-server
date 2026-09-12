@@ -12,8 +12,12 @@ import { pickAIProvider } from './ai.service.ts';
 import { logger } from '../logger/index.ts';
 
 export const query = async (req: Request, res: Response): Promise<any> => {
-  const { query, systemInfo }: AIQueryRequest = req.body;
-  const trimmedQuery = query?.trim();
+  const { systemInfo }: AIQueryRequest = req.body ?? {};
+  const query: unknown = req.body?.query;
+  if (typeof query !== 'string') {
+    return res.status(StatusCodes.BAD_REQUEST).send('Query must be a string');
+  }
+  const trimmedQuery = query.trim();
 
   if (!trimmedQuery?.length) {
     return res.status(StatusCodes.BAD_REQUEST).send('Missing query in the payload');
