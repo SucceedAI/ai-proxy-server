@@ -42,5 +42,10 @@
     "@types/node": "^20.11.24",
     "prettier": "^3.2.5",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "express": {
+      "qs": "^6.16.0"
+    }
   }
 }
