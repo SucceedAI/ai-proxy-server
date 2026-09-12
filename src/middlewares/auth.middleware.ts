@@ -34,8 +34,8 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
       throw new Error('Invalid token');
     }
 
-    // The macOS app uses a shared bearer token so Railway deployments can rotate
-    // one secret without forcing end-user credential handling in the client.
+    // This optional proxy accepts configured opaque bearer tokens, not signed JWTs.
+    // Current native SucceedAI apps use on-device models and do not call this server.
     next();
   } catch (e: unknown) {
     return res.status(StatusCodes.UNAUTHORIZED).send('Invalid token.');
