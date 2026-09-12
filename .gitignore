@@ -1,6 +1,9 @@
 # Distribution
 dist
 .env
+.env.*
+!.env.dist
+!.env.railway.example
 
 # Package manager
 node_modules

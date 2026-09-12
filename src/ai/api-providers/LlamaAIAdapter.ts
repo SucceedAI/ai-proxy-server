@@ -36,7 +36,7 @@ export class LlamaAIAdapter implements AIProvidable {
 
       return (typeof content === 'string' ? content : content?.text || '').trim();
     } catch (error: unknown) {
-      logger.error({ error }, 'LlamaAIAdapter error');
+      logger.error('LlamaAIAdapter request failed');
       throw new Error('Error processing AI query');
     }
   }

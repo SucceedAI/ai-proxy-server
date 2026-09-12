@@ -17,7 +17,7 @@ interface ConfigProps {
   rateLimitMax: number;
   jwtToken: string;
   browserExtensionSecret: string;
-  jwtTokenExpiryTime: string;
+  trustProxyHops: number;
 
   // Mistral AI
   mistralAiApiEnabled: boolean;
@@ -80,7 +80,7 @@ const config: ConfigProps = {
   rateLimitMax: parseNumber(readEnv('RATE_LIMIT_MAX'), 100),
   jwtToken: readEnv('JWT_SECRET'),
   browserExtensionSecret: readEnv('BROWSER_EXTENSION_SECRET'),
-  jwtTokenExpiryTime: readEnv('JWT_TOKEN_EXPIRY_TIME') || '3h',
+  trustProxyHops: Math.max(0, parseNumber(readEnv('TRUST_PROXY_HOPS'), 0)),
 
   mistralAiApiEnabled: parseBoolean(readEnv('MISTRAL_AI_API_ENABLED'), false),
   mistralAiApiKey: readEnv('MISTRAL_AI_API_KEY'),

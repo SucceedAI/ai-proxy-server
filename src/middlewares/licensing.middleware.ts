@@ -26,8 +26,9 @@ export const licensingMiddleware = async (req: Request, res: Response, next: Nex
   }
 
   // License Id and License Key are both receive from License header separated by a colon
-  const [licenseIdHeader, licenseKeyHeader] = licenseHeader.split(':');
-  if (!licenseIdHeader?.length || !licenseKeyHeader?.length) {
+  const parts = licenseHeader.split(':');
+  const [licenseIdHeader, licenseKeyHeader] = parts;
+  if (parts.length !== 2 || !licenseIdHeader?.length || !licenseKeyHeader?.length) {
     return res.status(StatusCodes.UNAUTHORIZED).send(errorMessage);
   }
 

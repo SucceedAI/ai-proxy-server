@@ -37,7 +37,7 @@ export class OpenAIAdapter implements AIProvidable {
 
       return response.output_text?.trim() || this.extractOutputText(response).trim();
     } catch (error: any) {
-      logger.error('Error in OpenAiAdapter:', error);
+      logger.error('OpenAIAdapter request failed');
       throw new Error('Error processing AI query');
     }
   }

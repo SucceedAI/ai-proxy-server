@@ -5,7 +5,6 @@
 
 import express from 'express';
 import type { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import packageJson from '../package.json' with { type: 'json' };
 import { config, messages } from './config/index.ts';
 import { StatusCodes } from 'http-status-codes';
@@ -17,20 +16,10 @@ router.get('/', (req: Request, res: Response) => {
   res.send(messages.downloadApp);
 });
 
-router.post('/token-generator', (req: Request, res: Response) => {
-  // Authentication logic here...
-
-  const token = jwt.sign(
-    {
-      /* user data */
-    },
-    config.jwtToken,
-    {
-      expiresIn: config.jwtTokenExpiryTime,
-    }
-  );
-
-  res.status(StatusCodes.OK).json({ token });
+router.post('/token-generator', (_req: Request, res: Response) => {
+  res
+    .status(StatusCodes.GONE)
+    .json({ message: 'Token generation is not supported. Configure a trusted client bearer token.' });
 });
 
 router.get('/health', (req: Request, res: Response) => {
