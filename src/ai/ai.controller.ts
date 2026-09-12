@@ -6,13 +6,12 @@
 import type { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
-import type { AIQueryRequest, BodyResponse } from './request.type.ts';
+import type { BodyResponse } from './request.type.ts';
 import type { AIProvidable } from './api-providers/index.ts';
 import { pickAIProvider } from './ai.service.ts';
 import { logger } from '../logger/index.ts';
 
 export const query = async (req: Request, res: Response): Promise<any> => {
-  const { systemInfo }: AIQueryRequest = req.body ?? {};
   const query: unknown = req.body?.query;
   if (typeof query !== 'string') {
     return res.status(StatusCodes.BAD_REQUEST).send('Query must be a string');
@@ -29,10 +28,7 @@ export const query = async (req: Request, res: Response): Promise<any> => {
 
   try {
     const aiProvider: AIProvidable = pickAIProvider();
-    logger.info(
-      { systemInfo, provider: aiProvider.getProviderName(), model: aiProvider.getModel() },
-      'AI query request'
-    );
+    logger.info({ provider: aiProvider.getProviderName(), model: aiProvider.getModel() }, 'AI query request');
 
     const queryResult: string = await aiProvider.query(trimmedQuery);
     const model = aiProvider.getModel();
@@ -43,7 +39,7 @@ export const query = async (req: Request, res: Response): Promise<any> => {
 
     res.status(StatusCodes.OK).json(body);
   } catch (error) {
-    logger.error('Error:', error);
+    logger.error('AI query failed');
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error processing request' });
   }
 };

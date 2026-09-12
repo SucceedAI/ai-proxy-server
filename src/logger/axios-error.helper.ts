@@ -8,5 +8,6 @@ import type { AxiosError } from 'axios';
 import { logger } from './index.ts';
 
 export const axiosError = (error: any | AxiosError, customDescription: string = ''): void => {
-  logger.error(`Error ${customDescription}`, axios.isAxiosError(error) ? error.response?.data?.message : error.message);
+  const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+  logger.error({ status }, customDescription || 'Upstream request failed');
 };
